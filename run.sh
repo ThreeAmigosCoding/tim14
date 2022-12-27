@@ -2,7 +2,6 @@
 
 # This script is used to build all necessary python components
 # and runt django website.
-
 lay_egs() {
   # The directory path is sent as the first argument
   cd $1
@@ -24,5 +23,5 @@ source clean.sh
 
 # build components
 lay_egs D3Core
-lay_egs json_parser
+lay_egs parser_json
 run_server django_project

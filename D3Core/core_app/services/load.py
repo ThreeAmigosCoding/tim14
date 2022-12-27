@@ -1,9 +1,9 @@
 from abc import abstractmethod, ABC
 
 
-class UcitatiService(ABC):
+class LoadService(ABC):
     @abstractmethod
-    def naziv(self):
+    def name(self):
         pass
 
     @abstractmethod
@@ -11,5 +11,6 @@ class UcitatiService(ABC):
         pass
 
     @abstractmethod
-    def ucitati(self):
+    def load(self):
         pass
+

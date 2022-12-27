@@ -1,5 +1,4 @@
 #!/bin/bash
-
 # This script is used to clean unnecessary generated files/folders.
 
 remove_eggs() {
@@ -13,7 +12,7 @@ remove_eggs() {
 
 # remove build files from components
 remove_eggs D3Core
-remove_eggs json_parser
+remove_eggs parser_json
 
 # remove db
 cd django_project
