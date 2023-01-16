@@ -4,19 +4,31 @@ from django.apps import AppConfig
 
 class CoreAppConfig(AppConfig):
     name = 'core_app'
-    parser_plugins = []
-    visualization_plugins = []
+    json_parser_plugin = []
+    xml_parser_plugin = []
+    simple_visualization_plugin = []
+    complex_visualization_plugin = []
+    testiranje="aaa"
 
     def ready(self):
         # Prilikom startovanja aplikacije, ucitavamo plugine na
         # vec poznati nacin.
-        self.parser_plugins = []
-        self.visualization_plugins = []
+        with open("log.txt", "a") as f:
+            f.write(str("fsdfsdfsfsdfsdfsdfsdfds") + "\n")
+        self.json_parser_plugin = load_plugins("parsers_json")
+        self.xml_parser_plugin = load_plugins("parsers_xml")
+        self.simple_visualization_plugin = load_plugins("visualization_simple")
+        self.complex_visualization_plugin = load_plugins("visualization_complex")
+        self.testiranje = "testiranjeeeeeeeee"
+
+
 
 
 def load_plugins(mark):
     plugins = []
     for ep in pkg_resources.iter_entry_points(group=mark):
+        with open("log.txt", "a") as f:
+            f.write(str(ep.load) + "\n")
         p = ep.load()
         print("{} {}".format(ep.name, p))
         plugin = p()

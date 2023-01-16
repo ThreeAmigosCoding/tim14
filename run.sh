@@ -24,4 +24,7 @@ source clean.sh
 # build components
 lay_egs D3Core
 lay_egs parser_json
+#lay_egs parser_xml
+#lay_egs visualization_complex
+#lay_egs visualization_simple
 run_server django_project

@@ -4,10 +4,10 @@ setup(
     name="visualization_simple",
     version="0.1",
     packages=find_packages(),
-    install_requires=['core_app>=0.1'],
+    install_requires=['core-app>=0.1'],
     entry_points={
-        'visualization':
-            ['visualize=visualize.code.visualize_code'],
+        'visualization_simple':
+            ['visualize_code_simple=visualize.code.visualize_code_simple:SimpleVisualization'],
     },
     zip_safe=True
 )
