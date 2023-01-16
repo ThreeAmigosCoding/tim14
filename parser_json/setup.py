@@ -4,10 +4,10 @@ setup(
     name="parser_json",
     version="0.1",
     packages=find_packages(),
-    install_requires=['core_app>=0.1'],
+    install_requires=['core-app>=0.1'],
     entry_points = {
         'parsers_json':
-            ['parse=parse.code.parse_code:JsonParser'],
+            ['parse_code_json=parse.code.parse_code_json:JsonParser'],
     },
     zip_safe=True
 )

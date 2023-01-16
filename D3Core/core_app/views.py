@@ -10,12 +10,14 @@ def index(request):
     xml_parser_plugin = apps.get_app_config('core_app').xml_parser_plugin
     complex_visualization_plugin = apps.get_app_config('core_app').complex_visualization_plugin
     simple_visualization_plugin = apps.get_app_config('core_app').simple_visualization_plugin
+    testiranje = apps.get_app_config('core_app').testiranje
 
     return render(request, "index.html", {"title": "Index", "test_models": test_models,
                                           "json_parser_plugin": json_parser_plugin,
                                           "xml_parser_plugin": xml_parser_plugin,
                                           "complex_visualization_plugin": complex_visualization_plugin,
-                                          "simple_visualization_plugin": simple_visualization_plugin})
+                                          "simple_visualization_plugin": simple_visualization_plugin,
+                                          "testiranje": testiranje})
 
 
 def load_plugin_json(request, id):

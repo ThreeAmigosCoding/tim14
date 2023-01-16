@@ -13,6 +13,9 @@ remove_eggs() {
 # remove build files from components
 remove_eggs D3Core
 remove_eggs parser_json
+#remove_eggs parser_xml
+#remove_eggs visualization_complex
+#remove_eggs visualization_simple
 
 # remove db
 cd django_project

@@ -4,10 +4,10 @@ setup(
     name="visualization_complex",
     version="0.1",
     packages=find_packages(),
-    install_requires=['core_app>=0.1'],
+    install_requires=['core-app>=0.1'],
     entry_points = {
         'visualization_complex':
-            ['visualize=visualize.code.visualize_code:ComplexVisualization'],
+            ['visualize_code=visualize.code.visualize_code:ComplexVisualization'],
     },
     zip_safe=True
 )
