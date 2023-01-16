@@ -6,8 +6,8 @@ setup(
     packages=find_packages(),
     install_requires=['core_app>=0.1'],
     entry_points={
-        'visualization':
-            ['visualize=visualize.code.visualize_code'],
+        'visualization_simple':
+            ['visualize=visualize.code.visualize_code:SimpleVisualization'],
     },
     zip_safe=True
 )

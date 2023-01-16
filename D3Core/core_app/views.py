@@ -1,7 +1,54 @@
 from django.apps.registry import apps
 from django.shortcuts import render, redirect
 
+from core_app.models import TestModel
+
 
 def index(request):
-    #plugini = apps.get_app_config('core_app').parser_plugins
-    return render(request, "index.html", {"title": "Index"})
+    test_models = TestModel.objects.all()
+    json_parser_plugin = apps.get_app_config('core_app').json_parser_plugin
+    xml_parser_plugin = apps.get_app_config('core_app').xml_parser_plugin
+    complex_visualization_plugin = apps.get_app_config('core_app').complex_visualization_plugin
+    simple_visualization_plugin = apps.get_app_config('core_app').simple_visualization_plugin
+
+    return render(request, "index.html", {"title": "Index", "test_models": test_models,
+                                          "json_parser_plugin": json_parser_plugin,
+                                          "xml_parser_plugin": xml_parser_plugin,
+                                          "complex_visualization_plugin": complex_visualization_plugin,
+                                          "simple_visualization_plugin": simple_visualization_plugin})
+
+
+def load_plugin_json(request, id):
+    request.session['selected_json_plugin'] = id
+    plugins = apps.get_app_config('core_app').json_parser_plugin
+    for i in plugins:
+        if i.identifier() == id:
+            i.load()
+    return redirect('index')
+
+
+def load_plugin_xml(request, id):
+    request.session['selected_xml_plugin'] = id
+    plugins = apps.get_app_config('core_app').xml_parser_plugin
+    for i in plugins:
+        if i.identifier() == id:
+            i.load()
+    return redirect('index')
+
+
+def visualize_plugin_complex(request, id):
+    request.session['selected_complex_plugin'] = id
+    plugins = apps.get_app_config('core_app').complex_visualization_plugin
+    for i in plugins:
+        if i.identifier() == id:
+            i.load()
+    return redirect('index')
+
+
+def visualize_plugin_simple(request, id):
+    request.session['selected_simple_plugin'] = id
+    plugins = apps.get_app_config('core_app').simple_visualization_plugin
+    for i in plugins:
+        if i.identifier() == id:
+            i.load()
+    return redirect('index')

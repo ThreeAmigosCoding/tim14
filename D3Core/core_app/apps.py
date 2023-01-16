@@ -4,14 +4,18 @@ from django.apps import AppConfig
 
 class CoreAppConfig(AppConfig):
     name = 'core_app'
-    parser_plugins = []
-    visualization_plugins = []
+    json_parser_plugin = []
+    xml_parser_plugin = []
+    simple_visualization_plugin = []
+    complex_visualization_plugin = []
 
     def ready(self):
         # Prilikom startovanja aplikacije, ucitavamo plugine na
         # vec poznati nacin.
-        self.parser_plugins = []
-        self.visualization_plugins = []
+        self.json_parser_plugin = load_plugins("parsers_json")
+        self.xml_parser_plugin = load_plugins("parsers_xml")
+        self.simple_visualization_plugin = load_plugins("visualization_simple")
+        self.complex_visualization_plugin = load_plugins("visualization_complex")
 
 
 def load_plugins(mark):

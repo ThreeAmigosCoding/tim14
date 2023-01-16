@@ -13,6 +13,56 @@
     {% block head_sadrzaj %}{% endblock %}
 </head>
 <body>
+
+    <div>
+        <h1> Json plugins </h1>
+      {% if plugini_ %}
+         {% for p in json_parser_plugin %}
+            <!--Prikazivanje dostupnih plugina korisniku-->
+            <a href="{% url 'json_parse_plugin' id=p.identifier %}">{{p.name}}</a>
+         {% endfor %}
+      {% else %}
+        <h3>Nema prepoznatih plugina za ucitavanje iz jsona</h3>
+      {% endif %}
+    </div>
+
+    <div>
+        <h1> Xml plugins </h1>
+      {% if plugini_ %}
+         {% for p in xml_parser_plugin %}
+            <!--Prikazivanje dostupnih plugina korisniku-->
+            <a href="{% url 'xml_parse_plugin' id=p.identifier %}">{{p.name}}</a>
+         {% endfor %}
+      {% else %}
+        <h3>Nema prepoznatih plugina za ucitavanje iz xml-a</h3>
+      {% endif %}
+    </div>
+
+    <div>
+        <h1> Visualization Complex plugins </h1>
+      {% if plugini_ %}
+         {% for p in complex_visualization_plugin %}
+            <!--Prikazivanje dostupnih plugina korisniku-->
+            <a href="{% url 'complex_visualization_plugin' id=p.identifier %}">{{p.name}}</a>
+         {% endfor %}
+      {% else %}
+        <h3>Nema prepoznatih plugina za complex vizualizaciju</h3>
+      {% endif %}
+    </div>
+
+    <div>
+        <h1> Visualization simple plugins </h1>
+      {% if plugini_ %}
+         {% for p in simple_visualization_plugin %}
+            <!--Prikazivanje dostupnih plugina korisniku-->
+            <a href="{% url 'simple_visualization_plugin' id=p.identifier %}">{{p.name}}</a>
+         {% endfor %}
+      {% else %}
+        <h3>Nema prepoznatih plugina za simple vizualizaciju</h3>
+      {% endif %}
+    </div>
+
     <h1>Empty application</h1>
+    {% block content %}{% endblock %}
 </body>
 </html>

@@ -6,8 +6,8 @@ setup(
     packages=find_packages(),
     install_requires=['core_app>=0.1'],
     entry_points = {
-        'parsers':
-            ['parse=parse.code.parse_code'],
+        'parsers_xml':
+            ['parse=parse.code.parse_code:XmlParser'],
     },
     zip_safe=True
 )

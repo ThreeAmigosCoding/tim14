@@ -24,3 +24,8 @@ class Edge(models.Model):
 
     def __str__(self):
         return self.start_node.name + " --- " + self.end_node.name
+
+
+class TestModel(models.Model):
+    name = models.CharField(max_length=50)
+    greeting = models.CharField(max_length=50)
