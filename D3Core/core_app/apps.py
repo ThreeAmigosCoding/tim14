@@ -13,6 +13,8 @@ class CoreAppConfig(AppConfig):
     def ready(self):
         # Prilikom startovanja aplikacije, ucitavamo plugine na
         # vec poznati nacin.
+        with open("log.txt", "a") as f:
+            f.write(str("fsdfsdfsfsdfsdfsdfsdfds") + "\n")
         self.json_parser_plugin = load_plugins("parsers_json")
         self.xml_parser_plugin = load_plugins("parsers_xml")
         self.simple_visualization_plugin = load_plugins("visualization_simple")
@@ -20,9 +22,13 @@ class CoreAppConfig(AppConfig):
         self.testiranje = "testiranjeeeeeeeee"
 
 
+
+
 def load_plugins(mark):
     plugins = []
     for ep in pkg_resources.iter_entry_points(group=mark):
+        with open("log.txt", "a") as f:
+            f.write(str(ep.load) + "\n")
         p = ep.load()
         print("{} {}".format(ep.name, p))
         plugin = p()

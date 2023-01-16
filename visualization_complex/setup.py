@@ -7,7 +7,7 @@ setup(
     install_requires=['core-app>=0.1'],
     entry_points = {
         'visualization_complex':
-            ['visualize_code=visualize.code.visualize_code:ComplexVisualization'],
+            ['visualize_code_complex=visualize.code.visualize_code_complex:ComplexVisualization'],
     },
     zip_safe=True
 )
