@@ -2,20 +2,48 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <!--Ucitavanje d3.js biblioteke moguce je na ovaj nacin.-->
     {% load static %}
-<!-- Download d3.v3.js from a website-->
-<!--    <script type="text/javascript" src="https://d3js.org/d3.v3.js"></script>-->
-<!-- Use local d3.v3.js -->
     <script type="text/javascript" src="{% static 'd3.v3.js' %}"></script>
     <link rel="stylesheet" href="{% static 'style.css' %}"/>
     <title>{{title}}</title>
+    <style>
+        body{
+            font-family: Verdana, sans-serif;
+            background-color: #222831;
+            color: white;
+        }
+        h1{
+            margin-top:0;
+        }
+        .plugin_container{
+            background-color: #393E46;
+            border-radius: 25px;
+            padding: 20px;
+            box-shadow: 0 4px 2px -2px black;
+            margin: 30px;
+        }
+        a{
+            font-size: larger;
+            color: white;
+        }
+        a:active{
+            color: white;
+            text-decoration: none;
+        }
+        a:link {
+            text-decoration: none;
+        }
+        a:visited{
+            text-decoration: none;
+        }
+
+    </style>
     {% block head_sadrzaj %}{% endblock %}
 </head>
 <body>
 
-    <div>
-        <h1> {{testiranje}} </h1>
+    <div class="plugin_container">
+        <h1>JSON Plugins</h1>
 
       {% if json_parser_plugin %}
          {% for p in json_parser_plugin %}
@@ -27,8 +55,8 @@
       {% endif %}
     </div>
 
-    <div>
-        <h1> Xml plugins </h1>
+    <div class="plugin_container">
+        <h1>XML plugins</h1>
       {% if xml_parser_plugin %}
          {% for p in xml_parser_plugin %}
             <!--Prikazivanje dostupnih plugina korisniku-->
@@ -39,8 +67,8 @@
       {% endif %}
     </div>
 
-    <div>
-        <h1> Visualization Complex plugins </h1>
+    <div class="plugin_container">
+        <h1>Visualization Complex plugins</h1>
       {% if complex_visualization_plugin %}
          {% for p in complex_visualization_plugin %}
             <!--Prikazivanje dostupnih plugina korisniku-->
@@ -51,8 +79,8 @@
       {% endif %}
     </div>
 
-    <div>
-        <h1> Visualization simple plugins </h1>
+    <div class="plugin_container">
+        <h1>Visualization simple plugins</h1>
       {% if simple_visualization_plugin %}
          {% for p in simple_visualization_plugin %}
             <!--Prikazivanje dostupnih plugina korisniku-->
@@ -63,7 +91,6 @@
       {% endif %}
     </div>
 
-    <h1>Empty application</h1>
     {% block content %}{% endblock %}
 </body>
 </html>
