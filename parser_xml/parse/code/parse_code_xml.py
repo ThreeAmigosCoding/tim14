@@ -1,5 +1,6 @@
-from core_app.models import TestModel
+from core_app.models import Graph, Node, Edge
 from core_app.services.load import LoadService
+import xml.etree.ElementTree as ET
 
 
 class XmlParser(LoadService):
@@ -11,13 +12,56 @@ class XmlParser(LoadService):
         return "parse_xml"
 
     def load(self):
-        TestModel.objects.all().delete()
+        self.parse_xml_to_graph(self.test_xml_data())
 
-        test1 = TestModel(name="Test num 1", greeting="Hello from Xml")
-        test1.save()
+    def parse_xml_to_graph(self, xml_string):
+        root = ET.fromstring(xml_string)
 
-        test2 = TestModel(name="Test num 2", greeting="Hello from Xml")
-        test2.save()
+        # Create a new Graph object
+        graph = Graph.objects.create(name='Graph')
+
+        # create a dictionary to store the nodes
+        nodes = {}
+
+        # recursive function that will traverse the xml tree
+        def parse_element(elem, parent=None):
+            data = elem.attrib
+            if not list(elem) and elem.text != '':
+                data['value'] = elem.text
+            # Create a new Node object
+            node = Node.objects.create(
+                graph=graph,
+                name=elem.tag,
+                data=data
+            )
+            nodes[node.pk] = node
+
+            # Create an Edge object if parent is not None
+            if parent is not None:
+                edge = Edge.objects.create(
+                    graph=graph,
+                    start_node=parent,
+                    end_node=node
+                )
+            # iterate over the children of the current element
+            for child in elem:
+                parse_element(child, node)
+
+        parse_element(root)
+
+        return graph
+
+    def test_xml_data(self):
+        return '''
+                <root>
+                    <name>John Smith</name>
+                    <age value1='30'>30</age>
+                    <address>
+                        <city>New York</city>
+                        <state>NY</state>
+                    </address>
+                </root>
+                '''
 
 
 
