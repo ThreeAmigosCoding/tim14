@@ -11,17 +11,11 @@ class CoreAppConfig(AppConfig):
     testiranje="aaa"
 
     def ready(self):
-        # Prilikom startovanja aplikacije, ucitavamo plugine na
-        # vec poznati nacin.
-        with open("log.txt", "a") as f:
-            f.write(str("fsdfsdfsfsdfsdfsdfsdfds") + "\n")
         self.json_parser_plugin = load_plugins("parsers_json")
         self.xml_parser_plugin = load_plugins("parsers_xml")
         self.simple_visualization_plugin = load_plugins("visualization_simple")
         self.complex_visualization_plugin = load_plugins("visualization_complex")
         self.testiranje = "testiranjeeeeeeeee"
-
-
 
 
 def load_plugins(mark):
