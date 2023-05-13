@@ -1,5 +1,6 @@
 from core_app.models import TestModel
 from core_app.services.load import LoadService
+from visualization_simple.visualize import views
 
 
 class SimpleVisualization(LoadService):
@@ -11,13 +12,15 @@ class SimpleVisualization(LoadService):
         return "visualization_simple"
 
     def load(self):
-        TestModel.objects.all().delete()
+        views.simple_visualization()
 
-        test1 = TestModel(name="Test num 1", greeting="Hello from Simple")
-        test1.save()
-
-        test2 = TestModel(name="Test num 2", greeting="Hello from Simple")
-        test2.save()
+        # TestModel.objects.all().delete()
+        #
+        # test1 = TestModel(name="Test num 1", greeting="Hello from Simple")
+        # test1.save()
+        #
+        # test2 = TestModel(name="Test num 2", greeting="Hello from Simple")
+        # test2.save()
 
 
 

@@ -10,6 +10,7 @@ class Graph(models.Model):
 
 class Node(models.Model):
     graph = models.ForeignKey(Graph, on_delete=models.CASCADE)
+    node_id = models.IntegerField(default=-1)
     name = models.CharField(max_length=255)
     data = models.TextField()
 

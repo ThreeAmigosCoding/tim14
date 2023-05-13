@@ -5,11 +5,13 @@ from core_app.models import TestModel
 from core_app.models import Graph
 
 from core_app.models import Node
+from core_app.models import Edge
 
 
 def index(request):
     test_models = TestModel.objects.all()
     nodes = Node.objects.all()
+    edges = Edge.objects.all()
     json_parser_plugin = apps.get_app_config('core_app').json_parser_plugin
     xml_parser_plugin = apps.get_app_config('core_app').xml_parser_plugin
     complex_visualization_plugin = apps.get_app_config('core_app').complex_visualization_plugin
@@ -20,7 +22,8 @@ def index(request):
                                           "xml_parser_plugin": xml_parser_plugin,
                                           "complex_visualization_plugin": complex_visualization_plugin,
                                           "simple_visualization_plugin": simple_visualization_plugin,
-                                          "nodes": nodes})
+                                          "nodes": nodes,
+                                          "edges": edges})
 
 
 def load_plugin_json(request, id):

@@ -1,0 +1,90 @@
+{% extends "base.html" %}
+{% block main_canvas %}
+
+<style>
+    circle{
+    fill: #00FFF5;
+    }
+    text{
+        fill: #222831;
+    }
+    line{
+        stroke: white;
+    }
+</style>
+
+<script src='https://d3js.org/d3.v3.min.js'></script>
+<script>
+    let nodes={
+        {% for node in nodes %}
+            "{{node.node_id}}":{id:"{{node.node_id}}" },
+        {% endfor %}
+        };
+    let edges=[
+        {% for edge in edges %}
+            {source:"{{edge.start_node.node_id}}",target:"{{edge.end_node.node_id}}"},
+        {% endfor %}
+    ]
+    edges.forEach(function(link) {
+        link.source = nodes[link.source];
+        link.target = nodes[link.target];
+    });
+
+    const width = document.getElementById("main-canvas-svg").clientWidth;
+    const height = document.getElementById("main-canvas-svg").clientHeight;
+
+    let force = d3.layout.force()
+        .size([width, height])
+        .nodes(d3.values(nodes))
+        .links(edges)
+        .on("tick", tick)
+        .linkDistance(60)
+        .linkStrength(3.5)
+        .charge(-350).start();
+
+    let svg = d3.select('svg').append("g");
+    let edgeComp = svg.selectAll('.edge')
+        .data(edges)
+        .enter().append('line')
+        .attr('class', 'edge');
+    let nodeComp = svg.selectAll('.node')
+        .data(force.nodes())
+        .enter().append('g')
+        .attr('class', 'node')
+        .attr('id', function(d){return d.id;})
+
+    d3.selectAll('.node').each(function(d){
+        d3.select("g[id='"+d.id+"']").append('circle').attr('r', 12);
+        d3.select("g[id='"+d.id+"']").append('text').attr('x',0).attr('y',3)
+        .attr('text-anchor','middle')
+        .attr('font-size',10).attr('font-family','sans-serif').text(d.id);
+    });
+
+    function updateNodes(){
+        nodeComp.attr("transform", function(d) {return "translate(" + d.x + "," + d.y + ")";})
+            .call(force.drag);
+    }
+    function updateEdges(){
+        edgeComp.attr('x1', function(d){
+                return d.source.x;
+            })
+            .attr('y1', function(d){
+                return d.source.y;
+            })
+            .attr('x2', function(d){
+                return d.target.x;
+            })
+            .attr('y2', function(d){
+                return d.target.y;
+            });
+    }
+
+    function tick() {
+        updateNodes();
+        updateEdges();
+        d3.selectAll("#main-canvas-svg g g").on("mousedown", function() {
+        d3.event.stopImmediatePropagation(); })
+    }
+
+</script>
+{% endblock %}

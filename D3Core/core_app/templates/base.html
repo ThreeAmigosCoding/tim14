@@ -15,13 +15,13 @@
         h1{
             margin-top:0;
         }
-        .plugin_container{
-            background-color: #393E46;
-            border-radius: 25px;
-            padding: 20px;
-            box-shadow: 0 4px 2px -2px black;
-            margin: 30px;
+
+        #plugins-list {
+            display: flex;
+            gap: 30px;
+            list-style-type: none;
         }
+
         a{
             font-size: larger;
             color: white;
@@ -37,58 +37,93 @@
             text-decoration: none;
         }
 
+        .views {
+            display: flex;
+            width: 100%;
+            height: 90vh;
+        }
+
+        .views div {
+            margin: 5px;
+            border: 3px solid white;
+        }
+
+        .tree-bird-container {
+            display: flex;
+            flex-direction: column;
+            width: 30%;
+        }
+
+        .tree-view {
+            height: 60vh;
+        }
+
+        .bird-view {
+            height: 30vh;
+        }
+
+        .main-canvas {
+            width: 70%;
+        }
+
     </style>
     {% block head_sadrzaj %}{% endblock %}
 </head>
 <body>
-
-    <div class="plugin_container">
-        <h1>JSON Plugins</h1>
-
-      {% if json_parser_plugin %}
-         {% for p in json_parser_plugin %}
-            <!--Prikazivanje dostupnih plugina korisniku-->
-            <a href="{% url 'json_parse_plugin' id=p.identifier %}">{{p.name}}</a>
-         {% endfor %}
-      {% else %}
-        <h3>Nema prepoznatih plugina za ucitavanje iz jsona</h3>
-      {% endif %}
-    </div>
-
-    <div class="plugin_container">
-        <h1>XML plugins</h1>
-      {% if xml_parser_plugin %}
-         {% for p in xml_parser_plugin %}
-            <!--Prikazivanje dostupnih plugina korisniku-->
-            <a href="{% url 'xml_parse_plugin' id=p.identifier %}">{{p.name}}</a>
-         {% endfor %}
-      {% else %}
-        <h3>Nema prepoznatih plugina za ucitavanje iz xml-a</h3>
-      {% endif %}
-    </div>
-
-    <div class="plugin_container">
-        <h1>Visualization Complex plugins</h1>
-      {% if complex_visualization_plugin %}
-         {% for p in complex_visualization_plugin %}
-            <!--Prikazivanje dostupnih plugina korisniku-->
-            <a href="{% url 'complex_visualization_plugin' id=p.identifier %}">{{p.name}}</a>
-         {% endfor %}
-      {% else %}
-        <h3>Nema prepoznatih plugina za complex vizualizaciju</h3>
-      {% endif %}
-    </div>
-
-    <div class="plugin_container">
-        <h1>Visualization simple plugins</h1>
-      {% if simple_visualization_plugin %}
-         {% for p in simple_visualization_plugin %}
-            <!--Prikazivanje dostupnih plugina korisniku-->
-            <a href="{% url 'simple_visualization_plugin' id=p.identifier %}">{{p.name}}</a>
-         {% endfor %}
-      {% else %}
-        <h3>Nema prepoznatih plugina za simple vizualizaciju</h3>
-      {% endif %}
+    <nav>
+        <ul id="plugins-list">
+            <li>
+                {% if json_parser_plugin %}
+                    {% for p in json_parser_plugin %}
+                        <!--Prikazivanje dostupnih plugina korisniku-->
+                        <a href="{% url 'json_parse_plugin' id=p.identifier %}">{{p.name}}</a>
+                    {% endfor %}
+                {% else %}
+                    <h3>Nema prepoznatih plugina za ucitavanje iz jsona</h3>
+                {% endif %}
+            </li>
+            <li>
+                {% if xml_parser_plugin %}
+                    {% for p in xml_parser_plugin %}
+                        <!--Prikazivanje dostupnih plugina korisniku-->
+                        <a href="{% url 'xml_parse_plugin' id=p.identifier %}">{{p.name}}</a>
+                    {% endfor %}
+                {% else %}
+                    <h3>Nema prepoznatih plugina za ucitavanje iz xml-a</h3>
+                {% endif %}
+            </li>
+            <li>
+                {% if complex_visualization_plugin %}
+                    {% for p in complex_visualization_plugin %}
+                        <!--Prikazivanje dostupnih plugina korisniku-->
+                        <a href="{% url 'complex_visualization_plugin' id=p.identifier %}">{{p.name}}</a>
+                    {% endfor %}
+                {% else %}
+                    <h3>Nema prepoznatih plugina za complex vizualizaciju</h3>
+                {% endif %}
+            </li>
+            <li>
+                {% if simple_visualization_plugin %}
+                    {% for p in simple_visualization_plugin %}
+                        <!--Prikazivanje dostupnih plugina korisniku-->
+                        <a href="{% url 'simple_visualization_plugin' id=p.identifier %}">{{p.name}}</a>
+                    {% endfor %}
+                {% else %}
+                    <h3>Nema prepoznatih plugina za simple vizualizaciju</h3>
+                {% endif %}
+            </li>
+        </ul>
+    </nav>
+    <div class="views">
+        <div class="tree-bird-container">
+            <div class="tree-view"></div>
+            <div class="bird-view"></div>
+        </div>
+        <div class="main-canvas">
+            <svg class="canvas-visualization" id="main-canvas-svg" width="100%" height="100%">
+            </svg>
+            {% block main_canvas %}{% endblock %}
+        </div>
     </div>
 
     {% block content %}{% endblock %}

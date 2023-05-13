@@ -6,6 +6,10 @@
     {% endfor %}
 
     {% for node in nodes %}
-        <p>{{ node.name }} : {{ node.data }}</p>
+        <p>{{ node.node_id }} : {{ node.data }}</p>
+    {% endfor %}
+
+    {% for edge in edges %}
+        <p>{{ edge }}</p>
     {% endfor %}
 {% endblock %}
