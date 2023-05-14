@@ -8,6 +8,4 @@ urlpatterns = [
 
     path('ucitavanje/json/plugin/<str:id>', views.load_plugin_json, name="json_parse_plugin"),
     path('ucitavanje/xml/plugin/<str:id>', views.load_plugin_xml, name="xml_parse_plugin"),
-    path('vizualizacija/complex/plugin/<str:id>', views.visualize_plugin_complex, name="complex_visualization_plugin"),
-    path('vizualizacija/simple/plugin/<str:id>', views.visualize_plugin_simple, name="simple_visualization_plugin")
 ]

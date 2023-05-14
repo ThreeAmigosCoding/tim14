@@ -9,7 +9,7 @@ class Graph(models.Model):
 
 
 class Node(models.Model):
-    graph = models.ForeignKey(Graph, on_delete=models.CASCADE)
+    graph = models.ForeignKey(Graph, on_delete=models.CASCADE, related_name='nodes')
     node_id = models.IntegerField(default=-1)
     name = models.CharField(max_length=255)
     data = models.TextField()
@@ -19,7 +19,7 @@ class Node(models.Model):
 
 
 class Edge(models.Model):
-    graph = models.ForeignKey(Graph, on_delete=models.CASCADE)
+    graph = models.ForeignKey(Graph, on_delete=models.CASCADE, related_name='edges')
     start_node = models.ForeignKey(Node, on_delete=models.CASCADE, related_name='start_node')
     end_node = models.ForeignKey(Node, on_delete=models.CASCADE, related_name='end_node')
 

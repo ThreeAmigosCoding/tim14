@@ -46,4 +46,18 @@ class JsonParser(LoadService):
         return graph
 
     def test_json_data(self):
-        return '{"name": "John Smith", "age": 30, "address": {"city": "New York", "state": "NY"}}'
+        data = []
+        for i in range(20):
+            main_obj = {
+                "id": i,
+                "name": f"Main Object {i}",
+                "nested_objects": []
+            }
+            for j in range(3):
+                nested_obj = {
+                    "id": f"{i}_{j}",
+                    "name": f"Nested Object {i}_{j}"
+                }
+                main_obj["nested_objects"].append(nested_obj)
+            data.append(main_obj)
+        return json.dumps(data)

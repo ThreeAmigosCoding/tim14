@@ -1,15 +1,4 @@
 {% extends "base.html" %}
 {% block content %}
-    <p>{{ testiranje }}</p>
-    {% for test_model in test_models %}
-        <p>{{ test_model.name }}, {{ test_model.greeting }}</p>
-    {% endfor %}
 
-    {% for node in nodes %}
-        <p>{{ node.node_id }} : {{ node.data }}</p>
-    {% endfor %}
-
-    {% for edge in edges %}
-        <p>{{ edge }}</p>
-    {% endfor %}
 {% endblock %}

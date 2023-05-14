@@ -93,23 +93,13 @@
                 {% endif %}
             </li>
             <li>
-                {% if complex_visualization_plugin %}
-                    {% for p in complex_visualization_plugin %}
+                {% if visualization_plugins %}
+                    {% for p in visualization_plugins %}
                         <!--Prikazivanje dostupnih plugina korisniku-->
-                        <a href="{% url 'complex_visualization_plugin' id=p.identifier %}">{{p.name}}</a>
+                        <a href="{% url p|add:'_visualization' %}">{{ p }} visualization</a>
                     {% endfor %}
                 {% else %}
-                    <h3>Nema prepoznatih plugina za complex vizualizaciju</h3>
-                {% endif %}
-            </li>
-            <li>
-                {% if simple_visualization_plugin %}
-                    {% for p in simple_visualization_plugin %}
-                        <!--Prikazivanje dostupnih plugina korisniku-->
-                        <a href="{% url 'simple_visualization_plugin' id=p.identifier %}">{{p.name}}</a>
-                    {% endfor %}
-                {% else %}
-                    <h3>Nema prepoznatih plugina za simple vizualizaciju</h3>
+                    <h3>Nema prepoznatih plugina za vizualizaciju</h3>
                 {% endif %}
             </li>
         </ul>
@@ -128,4 +118,5 @@
 
     {% block content %}{% endblock %}
 </body>
+<script src="{% static 'canvas_utils.js' %}"></script>
 </html>
