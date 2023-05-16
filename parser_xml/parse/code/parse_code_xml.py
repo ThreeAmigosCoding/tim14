@@ -5,6 +5,9 @@ import xml.etree.ElementTree as ET
 
 class XmlParser(LoadService):
 
+    def __init__(self):
+        self.node_id = 0
+
     def name(self):
         return "XML parser"
 
@@ -22,7 +25,6 @@ class XmlParser(LoadService):
 
         # create a dictionary to store the nodes
         nodes = {}
-
         # recursive function that will traverse the xml tree
         def parse_element(elem, parent=None):
             data = elem.attrib
@@ -32,8 +34,10 @@ class XmlParser(LoadService):
             node = Node.objects.create(
                 graph=graph,
                 name=elem.tag,
-                data=data
+                data=data,
+                node_id=self.node_id
             )
+            self.node_id +=1
             nodes[node.pk] = node
 
             # Create an Edge object if parent is not None

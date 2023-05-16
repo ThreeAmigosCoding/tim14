@@ -13,11 +13,43 @@
     }
 </style>
 
+<style>
+
+    .node-data {
+        width: 200px;
+        height: 300px;
+        overflow-y: auto;
+        display: block;
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        background-color: #393E46;
+        padding: 20px;
+        border: none;
+        border-radius: 5px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+        margin: 0;
+        z-index: 9999;
+    }
+
+    .node-data p {
+        word-wrap: break-word;
+    }
+
+</style>
+
+<div style="position: relative; border: none; margin: 0; padding: 0;">
+    <div id="node-data" class="node-data">
+        <h2>Node Data</h2>
+        <p id="nodeData"></p>
+    </div>
+</div>
+
 <script src='https://d3js.org/d3.v3.min.js'></script>
 <script>
     let nodes={
         {% for node in nodes %}
-            "{{node.node_id}}":{id:"{{node.node_id}}" },
+            "{{node.node_id}}":{id:"{{node.node_id}}", data:"{{ node.data|safe }}"},
         {% endfor %}
         };
     let edges=[
@@ -32,6 +64,17 @@
 
     const width = document.getElementById("main-canvas-svg").clientWidth;
     const height = document.getElementById("main-canvas-svg").clientHeight;
+
+    function formatNodeData(data) {
+        let keyValueList = data.trim().slice(1, -1).split(',');
+        let formattedData = ""
+        for (let item of keyValueList) {
+            let key = item.split(':')[0].trim().slice(1, -1)
+            let value = item.split(':')[1].trim()
+            formattedData += key + ": " + value + "\n\n"
+        }
+        return formattedData;
+    }
 
     let force = d3.layout.force()
         .size([width, height])
@@ -52,6 +95,10 @@
         .enter().append('g')
         .attr('class', 'node')
         .attr('id', function(d){return d.id;})
+        .attr('data', function(d){return d.data;})
+        .on("click", function(d) {
+            document.getElementById("nodeData").innerText = formatNodeData(d.data);
+        });
 
     d3.selectAll('.node').each(function(d){
         d3.select("g[id='"+d.id+"']").append('circle').attr('r', 12);
