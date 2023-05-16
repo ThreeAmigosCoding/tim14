@@ -40,7 +40,7 @@
 
 <div style="position: relative; border: none; margin: 0; padding: 0;">
     <div id="node-data" class="node-data">
-        <h2>Node Data</h2>
+        <h2 style="margin: 0">Node Data</h2>
         <p id="nodeData"></p>
     </div>
 </div>
@@ -49,7 +49,11 @@
 <script>
     let nodes={
         {% for node in nodes %}
-            "{{node.node_id}}":{id:"{{node.node_id}}", data:"{{ node.data|safe }}"},
+            "{{node.node_id}}":{id:"{{node.node_id}}", data: [
+                {% for attribute in node.data.all %}
+                    "{{ attribute }}",
+                {% endfor %}
+            ]},
         {% endfor %}
         };
     let edges=[
@@ -66,14 +70,10 @@
     const height = document.getElementById("main-canvas-svg").clientHeight;
 
     function formatNodeData(data) {
-        let keyValueList = data.trim().slice(1, -1).split(',');
-        let formattedData = ""
-        for (let item of keyValueList) {
-            let key = item.split(':')[0].trim().slice(1, -1)
-            let value = item.split(':')[1].trim()
-            formattedData += key + ": " + value + "\n\n"
-        }
-        return formattedData;
+        let formatedData = "";
+        for (let atr of data)
+            formatedData += atr + "\n\n";
+        return formatedData;
     }
 
     let force = d3.layout.force()

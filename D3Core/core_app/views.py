@@ -1,7 +1,6 @@
 from django.apps.registry import apps
 from django.shortcuts import render, redirect
 
-from core_app.models import TestModel
 from core_app.models import Graph
 
 from core_app.models import Node

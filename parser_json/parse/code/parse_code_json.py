@@ -1,12 +1,11 @@
 import json
 
-from core_app.models import TestModel
 from core_app.services.load import LoadService
 
 from core_app.models import Graph
 from core_app.models import Node
-
 from core_app.models import Edge
+from core_app.models import Attribute
 
 
 class JsonParser(LoadService):
@@ -28,11 +27,10 @@ class JsonParser(LoadService):
 
         def parse_json(data, parent_node=None):
             if isinstance(data, dict):
-                json_data_new = {}
+                node = Node.objects.create(node_id=self.node_id, name="Node", graph=graph)
                 for keym, valuem in data.items():
                     if not isinstance(valuem, (dict, list)):
-                        json_data_new[keym] = valuem
-                node = Node.objects.create(node_id=self.node_id, name="Node", graph=graph, data=json_data_new)
+                        Attribute.objects.create(node=node, name=keym, value=valuem)
                 self.node_id += 1
                 if parent_node:
                     Edge.objects.create(graph=graph, start_node=parent_node, end_node=node)

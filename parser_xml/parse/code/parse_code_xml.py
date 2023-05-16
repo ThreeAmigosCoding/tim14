@@ -1,4 +1,4 @@
-from core_app.models import Graph, Node, Edge
+from core_app.models import Graph, Node, Edge, Attribute
 from core_app.services.load import LoadService
 import xml.etree.ElementTree as ET
 
@@ -20,34 +20,40 @@ class XmlParser(LoadService):
     def parse_xml_to_graph(self, xml_string):
         root = ET.fromstring(xml_string)
 
-        # Create a new Graph object
         graph = Graph.objects.create(name='Graph')
 
-        # create a dictionary to store the nodes
         nodes = {}
-        # recursive function that will traverse the xml tree
+
         def parse_element(elem, parent=None):
-            data = elem.attrib
-            if not list(elem) and elem.text != '':
-                data['value'] = elem.text
-            # Create a new Node object
             node = Node.objects.create(
                 graph=graph,
                 name=elem.tag,
-                data=data,
                 node_id=self.node_id
             )
-            self.node_id +=1
+            self.node_id += 1
+
+            if not list(elem) and elem.text != '':
+                Attribute.objects.create(
+                    name='value',
+                    value=elem.text,
+                    node=node
+                )
+
+            for attr, value in elem.attrib.items():
+                Attribute.objects.create(
+                    name=attr,
+                    value=value,
+                    node=node
+                )
+
             nodes[node.pk] = node
 
-            # Create an Edge object if parent is not None
             if parent is not None:
-                edge = Edge.objects.create(
+                Edge.objects.create(
                     graph=graph,
                     start_node=parent,
                     end_node=node
                 )
-            # iterate over the children of the current element
             for child in elem:
                 parse_element(child, node)
 
@@ -66,6 +72,3 @@ class XmlParser(LoadService):
                     </address>
                 </root>
                 '''
-
-
-
