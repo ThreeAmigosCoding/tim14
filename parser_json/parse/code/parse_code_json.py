@@ -11,8 +11,11 @@ from core_app.models import Edge
 
 class JsonParser(LoadService):
 
+    def __init__(self):
+        self.node_id = 0
+
     def name(self):
-        return "Json parser"
+        return "JSON parser"
 
     def identifier(self):
         return "parse_json"
@@ -29,7 +32,8 @@ class JsonParser(LoadService):
                 for keym, valuem in data.items():
                     if not isinstance(valuem, (dict, list)):
                         json_data_new[keym] = valuem
-                node = Node.objects.create(name="Node", graph=graph, data=json_data_new)
+                node = Node.objects.create(node_id=self.node_id, name="Node", graph=graph, data=json_data_new)
+                self.node_id += 1
                 if parent_node:
                     Edge.objects.create(graph=graph, start_node=parent_node, end_node=node)
                 for key, value in data.items():
@@ -42,4 +46,18 @@ class JsonParser(LoadService):
         return graph
 
     def test_json_data(self):
-        return '{"name": "John Smith", "age": 30, "address": {"city": "New York", "state": "NY"}}'
+        data = []
+        for i in range(20):
+            main_obj = {
+                "id": i,
+                "name": f"Main Object {i}",
+                "nested_objects": []
+            }
+            for j in range(3):
+                nested_obj = {
+                    "id": f"{i}_{j}",
+                    "name": f"Nested Object {i}_{j}"
+                }
+                main_obj["nested_objects"].append(nested_obj)
+            data.append(main_obj)
+        return json.dumps(data)
