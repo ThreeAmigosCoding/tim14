@@ -5,9 +5,14 @@ setup(
     version="0.1",
     packages=find_packages(),
     install_requires=['core-app>=0.1'],
-    entry_points = {
-        'visualization_complex':
-            ['visualize_code_complex=visualize.code.visualize_code_complex:ComplexVisualization'],
+    package_data={'visualization_complex': ['templates/*.html']},
+    entry_points={
+        'visualization_metadata':
+            ['path=complex'],
+        'visualization':
+            ['visualize_code_complex=visualization_complex.apps.ComplexVisualizationConfig'],
+        'urls':
+            ['path=visualization_complex.urls']
     },
     zip_safe=True
 )
