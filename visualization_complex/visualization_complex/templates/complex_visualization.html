@@ -82,7 +82,7 @@
         .nodes(d3.values(nodes))
         .links(edges)
         .on("tick", tick)
-        .linkDistance(500)
+        .linkDistance(100)
         .linkStrength(5)
         .charge(-1000).start();
 
@@ -113,7 +113,9 @@
         let height = (dataLength === 0) ? textSize : dataLength * lineHeight;
         height += textSize * 4;
 
-        d3.select("g[id='" + d.id + "']").append('rect')
+        let complexDisplayGroup = d3.select("g[id='" + d.id + "']");
+
+        let container = complexDisplayGroup.append('rect')
             .attr('x', 0)
             .attr('y', 0)
             .attr('width', length)
@@ -122,7 +124,7 @@
             .attr('rx', 5)
             .attr('ry', 5);
 
-        d3.select("g[id='" + d.id + "']").append('text')
+        complexDisplayGroup.append('text')
             .attr('x', length / 2)
             .attr('y', textSize)
             .attr('text-anchor', 'middle')
@@ -131,7 +133,7 @@
             .attr('fill', 'black')
             .text(d.id);
 
-        d3.select("g[id='" + d.id + "']").append('line')
+        complexDisplayGroup.append('line')
             .attr('x1', 0)
             .attr('y1', lineHeight)
             .attr('x2', length)
@@ -140,7 +142,7 @@
             .attr('stroke-width', 2);
 
         for (let i = 0; i < dataLength; i++) {
-            let text = d3.select("g[id='" + d.id + "']").append('text')
+            let text = complexDisplayGroup.append('text')
               .attr('x', 5)
               .attr('y', (i + 1) * lineHeight) // Adjust the y-coordinate for wrapped lines
               .attr('font-size', textSize)
@@ -150,37 +152,40 @@
             let words = d.data[i].name + ': ' + d.data[i].value;
             let wordsArray = words.split(' ');
 
-            let line = '';
             let lineNumber = 0;
             let tspan = text.append('tspan')
-              .attr('x', 5)
-              .attr('dy', lineHeight);
+                .attr('x', 5)
+                .attr('dy', lineHeight)
+                .text(wordsArray[0]);
 
-            wordsArray.forEach(function (word) {
-                let currentLine = line + word + ' ';
+            for (let j = 1; j < wordsArray.length; j++) {
+                let word = wordsArray[j];
+                let currentLine = tspan.text();
+                tspan.text(currentLine + ' ' + word);
 
-                if (tspan.node().getComputedTextLength() > length - 1) {
-                    if (line === '') {
-                        tspan.text(word);
-                        line = '';
-                    }
-                    else {
-                        tspan.text(line);
-                        lineNumber++;
+                if (tspan.node().getComputedTextLength() > length - 10) {
+                    tspan.text(currentLine); // Remove the last word from the current line
+                    lineNumber++;
+                    height += lineHeight;
 
-                        line = word + ' ';
-                        tspan = text.append('tspan')
-                            .attr('x', 5)
-                            .attr('dy', lineHeight)
-                            .text(line);
-                    }
+                    text = complexDisplayGroup.append('text') // Create a new <text> element for the new line
+                      .attr('x', 5)
+                      .attr('y', (i + 1 + lineNumber) * lineHeight)
+                      .attr('font-size', textSize)
+                      .attr('font-family', 'sans-serif')
+                      .attr('fill', 'black');
+
+                    tspan = text.append('tspan')
+                      .attr('x', 5)
+                      .attr('dy', lineHeight)
+                      .text(word); // Start a new <tspan> for the current word
+                } else {
+                    tspan.text(currentLine + ' ' + word);
                 }
-                else {
-                    line = currentLine;
-                    tspan.text(line);
-                }
-            });
+            }
+
         }
+        container.attr('height', height);
     }
 
     function updateNodes(){
