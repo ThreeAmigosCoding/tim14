@@ -27,8 +27,8 @@ class Edge(models.Model):
 
 
 class Attribute(models.Model):
-    name = models.CharField(max_length=255)
-    value = models.CharField(max_length=255)
+    name = models.CharField(max_length=1023)
+    value = models.CharField(max_length=1023)
     node = models.ForeignKey(Node, on_delete=models.CASCADE, related_name='data')
 
     def __str__(self):

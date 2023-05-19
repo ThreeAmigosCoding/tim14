@@ -30,6 +30,6 @@ def load_visualization_plugins(path):
     result = []
     for ep in pkg_resources.iter_entry_points(group=path):
         result.append(str(ep).split("=")[1].strip())
-        with open("log.txt", "w") as f:
-            f.write(str(ep) + "\n")
+        # with open("log.txt", "w") as f:
+        #     f.write(str(ep) + "\n")
     return result

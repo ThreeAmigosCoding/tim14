@@ -54,7 +54,7 @@ class JsonParser(LoadService):
             for j in range(3):
                 nested_obj = {
                     "id": f"{i}_{j}",
-                    "name": f"Nested Object {i}_{j}"
+                    "name": "Nested Obj abcd abvgddjez 123456 Nested Obj abcd abvgddjez 123456"
                 }
                 main_obj["nested_objects"].append(nested_obj)
             data.append(main_obj)

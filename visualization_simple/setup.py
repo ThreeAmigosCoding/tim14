@@ -5,14 +5,14 @@ setup(
     version="0.1",
     packages=find_packages(),
     install_requires=['core-app>=0.1'],
-    package_data={'visualize': ['templates/*.html']},
+    package_data={'visualization_simple': ['templates/*.html']},
     entry_points={
         'visualization_metadata':
             ['path=simple'],
         'visualization':
-            ['visualize_code_simple=visualize.apps.SimpleVisualizationConfig'],
+            ['visualize_code_simple=visualization_simple.apps.SimpleVisualizationConfig'],
         'urls':
-            ['path=visualize.urls']
+            ['path=visualization_simple.urls']
     },
     zip_safe=True
 )
