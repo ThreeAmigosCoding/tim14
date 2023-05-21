@@ -86,7 +86,7 @@
         .linkStrength(5)
         .charge(-1000).start();
 
-    let svg = d3.select('svg').append("g");
+    let svg = d3.select('svg#main-canvas-svg').append("g");
     let edgeComp = svg.selectAll('.edge')
         .data(edges)
         .enter().append('line')
@@ -210,7 +210,11 @@
         updateNodes();
         updateEdges();
         d3.selectAll("#main-canvas-svg g g").on("mousedown", function() {
-        d3.event.stopImmediatePropagation(); })
+        d3.event.stopImmediatePropagation(); });
+
+        if (typeof updateBirdView === 'function') {
+            updateBirdView();
+        }
     }
 
 </script>
