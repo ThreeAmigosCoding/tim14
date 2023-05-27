@@ -22,6 +22,8 @@ class XmlParser(LoadService):
     def parse_xml_to_graph(self, xml_string):
         root = ET.fromstring(xml_string)
         Graph.objects.all().delete()
+        self.id_map = {}
+        self.reference_map = {}
         graph = Graph.objects.create(name='Graph')
         nodes = {}
         self.parse_element(graph, nodes, root)
