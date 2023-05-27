@@ -1,4 +1,5 @@
 from django.apps.registry import apps
+from django.db.models import Q
 from django.shortcuts import render, redirect
 
 from core_app.models import Graph
@@ -36,19 +37,14 @@ def load_plugin_xml(request, id):
     return redirect('index')
 
 
-# def visualize_plugin_complex(request, id):
-#     request.session['selected_complex_plugin'] = id
-#     plugins = apps.get_app_config('core_app').complex_visualization_plugin
-#     for i in plugins:
-#         if i.identifier() == id:
-#             i.load()
-#     return redirect('index')
-#
-#
-# def visualize_plugin_simple(request, id):
-#     request.session['selected_simple_plugin'] = id
-#     plugins = apps.get_app_config('core_app').simple_visualization_plugin
-#     for i in plugins:
-#         if i.identifier() == id:
-#             i.load()
-#     return redirect('index')
+def search_graph(request, layout_type, query_string):
+    filtered_nodes = Node.objects.filter(Q(data__name__icontains=query_string) | Q(data__value__icontains=query_string))
+    Node.objects.exclude(pk__in=filtered_nodes).update(enabled=False)
+    Edge.objects.filter(Q(start_node__enabled=False) | Q(end_node__enabled=False)).update(enabled=False)
+    return redirect("/visualization/" + layout_type)
+
+
+def reset_graph(request, layout_type):
+    Node.objects.all().update(enabled=True)
+    Edge.objects.all().update(enabled=True)
+    return redirect("/visualization/" + layout_type)
