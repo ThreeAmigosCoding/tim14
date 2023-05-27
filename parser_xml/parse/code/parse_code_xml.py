@@ -7,6 +7,8 @@ class XmlParser(LoadService):
 
     def __init__(self):
         self.node_id = 0
+        self.id_map = {}
+        self.reference_map = {}
 
     def name(self):
         return "XML parser"
@@ -19,56 +21,86 @@ class XmlParser(LoadService):
 
     def parse_xml_to_graph(self, xml_string):
         root = ET.fromstring(xml_string)
-
+        Graph.objects.all().delete()
         graph = Graph.objects.create(name='Graph')
-
         nodes = {}
+        self.parse_element(graph, nodes, root)
 
-        def parse_element(elem, parent=None):
-            node = Node.objects.create(
-                graph=graph,
-                name=elem.tag,
-                node_id=self.node_id
-            )
-            self.node_id += 1
-
-            if not list(elem) and elem.text != '':
-                Attribute.objects.create(
-                    name='value',
-                    value=elem.text,
-                    node=node
-                )
-
-            for attr, value in elem.attrib.items():
-                Attribute.objects.create(
-                    name=attr,
-                    value=value,
-                    node=node
-                )
-
-            nodes[node.pk] = node
-
-            if parent is not None:
+        for node, reference in self.reference_map.items():
+            if reference in self.id_map:
                 Edge.objects.create(
                     graph=graph,
-                    start_node=parent,
-                    end_node=node
+                    start_node=node,
+                    end_node=self.id_map[reference]
                 )
-            for child in elem:
-                parse_element(child, node)
-
-        parse_element(root)
 
         return graph
 
+    def parse_element(self, graph, nodes, elem, parent=None):
+        node = Node.objects.create(
+            graph=graph,
+            name=elem.tag,
+            node_id=self.node_id
+        )
+        self.node_id += 1
+
+        if not list(elem) and (elem.text is not None and elem.text.strip().replace("\n", " ")):
+            Attribute.objects.create(
+                name='value',
+                value=elem.text.strip().replace("\n", " "),
+                node=node
+            )
+
+        for attr, value in elem.attrib.items():
+            Attribute.objects.create(
+                name=attr,
+                value=value,
+                node=node
+            )
+
+            if attr == "id":
+                self.id_map[value] = node
+            if attr == "references":
+                self.reference_map[node] = value
+
+        nodes[node.pk] = node
+
+        if parent is not None:
+            Edge.objects.create(
+                graph=graph,
+                start_node=parent,
+                end_node=node
+            )
+
+        for child in elem:
+            self.parse_element(graph, nodes, child, node)
+
     def test_xml_data(self):
         return '''
-                <root>
-                    <name>John Smith</name>
-                    <age value1='30'>30</age>
-                    <address>
-                        <city>New York</city>
-                        <state>NY</state>
-                    </address>
-                </root>
+                <graph>
+                    <person id="1" references="1">
+                        <name>Milos</name>
+                        <age>28</age>
+                        <address>
+                            <street>123 Main St</street>
+                            <city>New York</city>
+                        </address>
+                    </person>
+                    <person id="2" references="3">
+                        <name>Alice</name>
+                        <age>32</age>
+                        <address>
+                            <street>456 Elm St</street>
+                            <city>Los Angeles</city>
+                        </address>
+                    </person>
+                    <person id="3" references="1">
+                        <name>Alice</name>
+                        <age>32</age>
+                        <address>
+                            <street>456 Elm St</street>
+                            <city>Los Angeles</city>
+                        </address>
+                    </person>
+                </graph>
                 '''
