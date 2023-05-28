@@ -6,6 +6,8 @@ from core_app.models import Graph
 from core_app.models import Node
 from core_app.models import Edge
 from core_app.models import Attribute
+from datetime import datetime
+
 
 
 class JsonParser(LoadService):
@@ -46,7 +48,7 @@ class JsonParser(LoadService):
             node = Node.objects.create(node_id=self.node_id, name=key_name, graph=graph)
             for keym, valuem in data.items():
                 if not isinstance(valuem, (dict, list)):
-                    Attribute.objects.create(node=node, name=keym, value=valuem)
+                    Attribute.objects.create(node=node, name=keym, value=valuem, value_type=self.get_variable_type(valuem))
                     if keym == "id":
                         self.id_map[valuem] = node
                     if keym == "references":
@@ -58,7 +60,7 @@ class JsonParser(LoadService):
                 self.parse_json(graph, value, node, key)
         elif isinstance(data, list):
             if self.check_list_type(data) == "Primitive":
-                Attribute.objects.create(node=parent_node, name=key_name, value=data)
+                Attribute.objects.create(node=parent_node, name=key_name, value=data, value_type=self.get_variable_type(data))
             else:
                 for item in data:
                     self.parse_json(graph, item, parent_node, key_name)
@@ -72,6 +74,26 @@ class JsonParser(LoadService):
         else:
             return "Primitive"
 
+    def get_variable_type(self, string):
+
+        try:
+            value = eval(string)
+            return type(value).__name__
+        except (NameError, SyntaxError):
+            if self.is_date_string(string):
+                return "datetime"
+            return "str"
+
+    def is_date_string(self, string):
+        date_formats = ["%Y-%m-%d", "%d/%m/%Y", "%m/%d/%Y"]  # Add more formats if needed
+        for date_format in date_formats:
+            try:
+                datetime.strptime(string, date_format)
+                return True
+            except ValueError:
+                pass
+        return False
+
     def test_json_data(self):
         return '''
                 {
@@ -81,7 +103,7 @@ class JsonParser(LoadService):
                         "id": "1",
                         "references": "1",
                         "name": "Milos",
-                        "age": "28",
+                        "age": "2023-03-03",
                         "address": {
                           "street": "123 Main St",
                           "city": "New York"

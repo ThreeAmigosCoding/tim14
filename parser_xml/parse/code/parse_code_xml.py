@@ -1,6 +1,7 @@
 from core_app.models import Graph, Node, Edge, Attribute
 from core_app.services.load import LoadService
 import xml.etree.ElementTree as ET
+from datetime import datetime
 
 
 class XmlParser(LoadService):
@@ -50,6 +51,7 @@ class XmlParser(LoadService):
             Attribute.objects.create(
                 name='value',
                 value=elem.text.strip().replace("\n", " "),
+                value_type=self.get_variable_type(elem.text.strip().replace("\n", " ")),
                 node=node
             )
 
@@ -57,6 +59,7 @@ class XmlParser(LoadService):
             Attribute.objects.create(
                 name=attr,
                 value=value,
+                value_type=self.get_variable_type(value),
                 node=node
             )
 
@@ -76,6 +79,26 @@ class XmlParser(LoadService):
 
         for child in elem:
             self.parse_element(graph, nodes, child, node)
+
+    def get_variable_type(self, string):
+
+        try:
+            value = eval(string)
+            return type(value).__name__
+        except (NameError, SyntaxError):
+            if self.is_date_string(string):
+                return "datetime"
+            return "str"
+
+    def is_date_string(self, string):
+        date_formats = ["%Y-%m-%d", "%d/%m/%Y", "%m/%d/%Y"]  # Add more formats if needed
+        for date_format in date_formats:
+            try:
+                datetime.strptime(string, date_format)
+                return True
+            except ValueError:
+                pass
+        return False
 
     def test_xml_data(self):
         return '''

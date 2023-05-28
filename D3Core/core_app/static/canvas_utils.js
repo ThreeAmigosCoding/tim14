@@ -14,3 +14,14 @@ document.getElementById('reset-graph-btn').addEventListener('click', function() 
     let layoutType = location.href.split('/').pop();
     location.href = "/reset/" + layoutType;
 });
+
+document.getElementById('apply-filter').addEventListener('click', function () {
+    let layoutType = location.href.split('/').pop();
+    let attributeName = document.getElementById('filter-input-attribute').value.trim();
+    let operator = document.getElementById('filter-input-operator').value.trim();
+    let operand = document.getElementById('filter-input-operand').value.trim();
+    // some validation for operation e.g. "operands, attributes, operators"
+
+    let operation = attributeName + " " + operator + " " + operand;
+    location.href = "/filter/" + layoutType + "/" + operation;
+});

@@ -9,5 +9,6 @@ urlpatterns = [
     path('ucitavanje/json/plugin/<str:id>', views.load_plugin_json, name="json_parse_plugin"),
     path('ucitavanje/xml/plugin/<str:id>', views.load_plugin_xml, name="xml_parse_plugin"),
     path('search/<str:layout_type>/<str:query_string>', views.search_graph, name="search_graph"),
+    path('filter/<str:layout_type>/<str:operation>', views.filter_graph, name="filter_graph"),
     path('reset/<str:layout_type>', views.reset_graph, name="reset_graph")
 ]
