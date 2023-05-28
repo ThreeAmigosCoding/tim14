@@ -44,6 +44,20 @@ def search_graph(request, layout_type, query_string):
     return redirect("/visualization/" + layout_type)
 
 
+def filter_graph(request, layout_type, operation):
+    attribute_name = operation.split(" ")[0].strip()
+    operator = operation.split(" ")[1].strip()
+    operand = operation.split(" ")[2].strip()
+
+    # filter logic
+
+    with open("log.txt", "a") as f:
+        f.write(str(attribute_name) + "\n")
+        f.write(str(operator) + "\n")
+        f.write(str(operand) + "\n")
+
+    return redirect("/visualization/" + layout_type)
+
 def reset_graph(request, layout_type):
     Node.objects.all().update(enabled=True)
     Edge.objects.all().update(enabled=True)
