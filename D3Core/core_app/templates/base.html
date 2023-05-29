@@ -100,6 +100,16 @@
             margin: 0;
         }
 
+        .tree-view {
+            overflow: auto;
+        }
+
+        #tree-view-list {
+            list-style-type: none;
+            padding-left: 20px;
+            padding-right: 40px;
+        }
+
     </style>
     {% block head_sadrzaj %}{% endblock %}
 </head>
@@ -140,7 +150,11 @@
     </nav>
     <div class="views">
         <div class="tree-bird-container">
-            <div class="tree-view"></div>
+            <div class="tree-view">
+                <ul id="tree-view-list">
+                    {% include "tree_view.html" with root_nodes=root_nodes nodes=nodes edges=edges %}
+                </ul>
+            </div>
             <div class="bird-view">
                 <svg class="bird-canvas-visualization" id="bird-canvas-svg" width="100%" height="100%">
                     <g id="bird-g"></g>
@@ -173,6 +187,8 @@
 
     {% block content %}{% endblock %}
 </body>
+
 <script src="{% static 'bird_view.js' %}" ></script>
 <script src="{% static 'canvas_utils.js' %}"></script>
+
 </html>

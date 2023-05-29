@@ -64,23 +64,17 @@ def filter_graph(request, layout_type, operation):
 
     operand_type = get_variable_type(operand)
 
-
     if operand_type == "str" and operator != '==' and operator != '!=':
         return HttpResponseBadRequest("Invalid operand type")
 
-
-    # nodes = Node.objects.filter(Q(data__name__iexact=attribute_name), Q(data__value_type__iexact=operand_type))
     all_nodes = Node.objects.filter(Q(data__name__iexact=attribute_name) & Q(data__value_type__iexact=operand_type))
     nodes = []
     for node in all_nodes:
         if node.enabled:
             nodes.append(node)
 
-    # nodes = all_nodes.filter(enabled=True)
     Node.objects.all().update(enabled=False)
     Edge.objects.all().update(enabled=False)
-    # Node.objects.filter(Q(pk__in=nodes)).update(enabled=False)
-    # Edge.objects.filter(Q(start_node__enabled=False) | Q(end_node__enabled=False)).update(enabled=False)
 
     for node in nodes:
         for atr in node.data.all():
@@ -91,12 +85,6 @@ def filter_graph(request, layout_type, operation):
                 break
     Edge.objects.filter(Q(start_node__enabled=True) & Q(end_node__enabled=True)).update(enabled=True)
 
-
-    # with open("log.txt", "a") as f:
-    #     f.write(str(attribute_name) + "\n")
-    #     f.write(str(operator) + "\n")
-    #     f.write(str(operand) + "\n")
-
     return redirect("/visualization/" + layout_type)
 
 
@@ -104,6 +92,7 @@ def reset_graph(request, layout_type):
     Node.objects.all().update(enabled=True)
     Edge.objects.all().update(enabled=True)
     return redirect("/visualization/" + layout_type)
+
 
 def compare(a, b, operator, node):
     if operator == "!=":

@@ -5,12 +5,14 @@ from django.apps.registry import apps
 
 def simple_visualization(request):
     graph = Graph.objects.all()[0]
+    root_nodes = graph.find_root_nodes()
     nodes = graph.nodes.all()
     edges = graph.edges.all()
     json_parser_plugin = apps.get_app_config('core_app').json_parser_plugin
     xml_parser_plugin = apps.get_app_config('core_app').xml_parser_plugin
     visualization_plugins = apps.get_app_config('core_app').visualization_plugins
     return render(request, "simple_visualization.html", {
+        "root_nodes": root_nodes,
         "nodes": nodes,
         "edges": edges,
         "json_parser_plugin": json_parser_plugin,
