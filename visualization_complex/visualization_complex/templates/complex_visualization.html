@@ -47,19 +47,19 @@
 
 <script src='https://d3js.org/d3.v3.min.js'></script>
 <script>
-    let nodes={
+    let nodes = {
         {% for node in nodes %}
             {% if node.enabled == True %}
                 "{{node.node_id}}":{id:"{{node.node_id}}", data: [
                     {% for attribute in node.data.all %}
-                        {#"{{ attribute }}",#}
                         {name: "{{attribute.name}}", value: "{{attribute.value}}"},
                     {% endfor %}
                 ], node_name:"{{ node.name }}"},
             {% endif %}
         {% endfor %}
         };
-    let edges=[
+
+    let edges = [
         {% for edge in edges %}
             {% if edge.enabled == True %}
                 {source:"{{edge.start_node.node_id}}",target:"{{edge.end_node.node_id}}"},

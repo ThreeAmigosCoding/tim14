@@ -1,0 +1,107 @@
+<script>
+    let treeViewNodes = {
+        {% for node in nodes %}
+            "{{node.node_id}}":{id:"{{node.node_id}}", data: [
+                {% for attribute in node.data.all %}
+                    {name: "{{attribute.name}}", value: "{{attribute.value}}"},
+                {% endfor %}
+            ], node_name:"{{ node.name }}", enabled:"{{ node.enabled }}"},
+        {% endfor %}
+    };
+
+    let treeViewEdges = [
+        {% for edge in edges %}
+            {source:"{{edge.start_node.node_id}}",target:"{{edge.end_node.node_id}}", enabled:"{{ edge.enabled }}"},
+        {% endfor %}
+    ]
+
+    let treeViewRootNodes = {
+        {% for node in root_nodes %}
+            "{{node.node_id}}":{id:"{{node.node_id}}", data: [
+                {% for attribute in node.data.all %}
+                    {name: "{{attribute.name}}", value: "{{attribute.value}}"},
+                {% endfor %}
+            ], node_name:"{{ node.name }}", enabled:"{{ node.enabled }}"},
+        {% endfor %}
+    };
+
+    function formatTreeView(data) {
+        let formattedData = "";
+        for (let atr of data)
+            formattedData += atr.name + ": " + atr.value + "\n\n";
+        return formattedData;
+    }
+
+    function createTreeView(nodes, ulTag) {
+        for (let id in nodes) {
+            let node = nodes[id];
+
+            if (ulTag.querySelector("li span")) {
+                console.log("html: ",ulTag.querySelector("li span").innerHTML.substring(2))
+                console.log("node: ", node.id + " : " + node.node_name)
+            }
+
+            if (ulTag.querySelectorAll("li span")) {
+                let exists = false;
+                ulTag.querySelectorAll("li span").forEach(function(li) {
+                    if (li.innerHTML.substring(2) ===  node.id + " : " + node.node_name) {
+                        exists = true;
+                    }
+                  });
+                if (exists) continue;
+            }
+
+            if (node.enabled === "False") {
+                createTreeView(getConnectedNodes(node), ulTag);
+                continue;
+            }
+
+            let liTag = document.createElement("li");
+            let spanTag = document.createElement("span")
+            spanTag.innerHTML = "+ " + node.id + " : " + node.node_name;
+            liTag.appendChild(spanTag);
+
+            liTag.addEventListener("mouseenter", function() {
+              liTag.style.cursor = "pointer";
+            });
+            liTag.addEventListener("mouseleave", function() {
+              liTag.style.cursor = "default";
+            });
+
+            spanTag.addEventListener("click", function() {
+                document.getElementById("nodeData").innerText = formatTreeView(node.data);
+                document.getElementById("node-data-title").innerText = node.id + " : " + node.node_name;
+                if (spanTag.innerHTML[0] === "-") {
+                    spanTag.innerHTML = "+ " + node.id + " : " + node.node_name;
+                    let childUl = liTag.querySelector("ul");
+                    if (childUl) {
+                        liTag.removeChild(childUl);
+                    }
+                } else {
+                    spanTag.innerHTML = "- " + node.id + " : " + node.node_name;
+                    let childUl = document.createElement("ul");
+                    childUl.style.listStyleType = "none";
+                    liTag.appendChild(childUl);
+                    createTreeView(getConnectedNodes(node), childUl);
+                }
+            });
+
+            ulTag.appendChild(liTag);
+        }
+    }
+
+    function getConnectedNodes(node) {
+        let connectedNodes = []
+        for (let edge of treeViewEdges) {
+            if (edge.source === node.id) {
+                connectedNodes.push(treeViewNodes[edge.target]);
+            }
+            {#else if (edge.target === node.id) {#}
+            {#    connectedNodes.push(treeViewNodes[edge.source]);}#}
+        }
+        return connectedNodes;
+    }
+
+    createTreeView(treeViewRootNodes, document.getElementById("tree-view-list"));
+
+</script>

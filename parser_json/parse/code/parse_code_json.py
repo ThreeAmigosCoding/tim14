@@ -109,24 +109,12 @@ class JsonParser(LoadService):
                           "city": "New York"
                         }
                       },
-                      
-                      
-                      
-                      
-                      
-                      
                       {
                         "id": "2",
                         "references": "3",
                         "name": "Alice",
                         "age": "32",
                         "address": {
-                        
-                        
-                        
-                        
-                        
-                        
                           "street": "456 Elm St",
                           "city": "Los Angeles"
                         }
