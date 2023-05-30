@@ -1,33 +1,27 @@
 <script>
     let treeViewNodes = {
         {% for node in nodes %}
-            {% if node.enabled == True %}
-                "{{node.node_id}}":{id:"{{node.node_id}}", data: [
-                    {% for attribute in node.data.all %}
-                        {name: "{{attribute.name}}", value: "{{attribute.value}}"},
-                    {% endfor %}
-                ], node_name:"{{ node.name }}"},
-            {% endif %}
+            "{{node.node_id}}":{id:"{{node.node_id}}", data: [
+                {% for attribute in node.data.all %}
+                    {name: "{{attribute.name}}", value: "{{attribute.value}}"},
+                {% endfor %}
+            ], node_name:"{{ node.name }}", enabled:"{{ node.enabled }}"},
         {% endfor %}
     };
 
     let treeViewEdges = [
         {% for edge in edges %}
-            {% if edge.enabled == True %}
-                {source:"{{edge.start_node.node_id}}",target:"{{edge.end_node.node_id}}"},
-            {% endif %}
+            {source:"{{edge.start_node.node_id}}",target:"{{edge.end_node.node_id}}", enabled:"{{ edge.enabled }}"},
         {% endfor %}
     ]
 
     let treeViewRootNodes = {
         {% for node in root_nodes %}
-            {% if node.enabled == True %}
-                "{{node.node_id}}":{id:"{{node.node_id}}", data: [
-                    {% for attribute in node.data.all %}
-                        {name: "{{attribute.name}}", value: "{{attribute.value}}"},
-                    {% endfor %}
-                ], node_name:"{{ node.name }}"},
-            {% endif %}
+            "{{node.node_id}}":{id:"{{node.node_id}}", data: [
+                {% for attribute in node.data.all %}
+                    {name: "{{attribute.name}}", value: "{{attribute.value}}"},
+                {% endfor %}
+            ], node_name:"{{ node.name }}", enabled:"{{ node.enabled }}"},
         {% endfor %}
     };
 
@@ -41,6 +35,27 @@
     function createTreeView(nodes, ulTag) {
         for (let id in nodes) {
             let node = nodes[id];
+
+            if (ulTag.querySelector("li span")) {
+                console.log("html: ",ulTag.querySelector("li span").innerHTML.substring(2))
+                console.log("node: ", node.id + " : " + node.node_name)
+            }
+
+            if (ulTag.querySelectorAll("li span")) {
+                let exists = false;
+                ulTag.querySelectorAll("li span").forEach(function(li) {
+                    if (li.innerHTML.substring(2) ===  node.id + " : " + node.node_name) {
+                        exists = true;
+                    }
+                  });
+                if (exists) continue;
+            }
+
+            if (node.enabled === "False") {
+                createTreeView(getConnectedNodes(node), ulTag);
+                continue;
+            }
+
             let liTag = document.createElement("li");
             let spanTag = document.createElement("span")
             spanTag.innerHTML = "+ " + node.id + " : " + node.node_name;
