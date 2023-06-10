@@ -1,92 +1,83 @@
-# tim14
+# Graph Parser and Visualizator
 
+Welcome to the Graph Parser and Visualizator! This application, developed with Django's component-driven approach, offers a comprehensive set of features to parse and visualize graphs effortlessly. Our app comprises several independent components, each serving a unique purpose: the Core, XML parser, JSON parser, D3 Simple Visualizator, and D3 Complex Visualizator. By harnessing the app's robust parsing and visualization capabilities, you can effortlessly transform intricate data into insightful visual representations.
 
+## Components
 
-## Getting started
+### Core
+At the heart of the Graph Parser and Visualizator App lies the Core component, integrating all other components to ensure a cohesive user experience. With an array of robust functionalities, the Core component empowers users to efficiently search, filter, and manipulate data within the app.
 
-To make it easy for you to get started with GitLab, here's a list of recommended next steps.
+One notable feature of the Core component is its tree-view, resembling a familiar file system structure. This intuitive navigation system enables users to effortlessly explore their data, facilitating a seamless understanding of its organization. Complementing this, the Core component offers both a bird's-eye view and a main canvas, providing multiple perspectives on the data. These visual aids facilitate the identification of patterns and trends, enabling users to extract valuable insights.
 
-Already a pro? Just edit this README.md and make it your own. Want to make it easy? [Use the template at the bottom](#editing-this-readme)!
+In summary, the Core component is an indispensable element of the app, playing a vital role in managing and visualizing complex data. With its comprehensive toolset, users can harness the power of the Graph Parser and Visualizator to effortlessly handle intricate data with ease and precision.
 
-## Add your files
+### XML Parser
 
-- [ ] [Create](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#create-a-file) or [upload](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#upload-a-file) files
-- [ ] [Add files using the command line](https://docs.gitlab.com/ee/gitlab-basics/add-file.html#add-a-file-using-the-command-line) or push an existing Git repository with the following command:
+The XML Parser component within the Graph Parser and Visualizator is a tool designed to parse and visualize XML data effectively. Powered by advanced parsing capabilities, this component effortlessly handles diverse XML data sets and represents them in a graph format.
 
-```
-cd existing_repo
-git remote add origin https://gitlab.com/sok_2022_2023/tim14.git
-git branch -M main
-git push -uf origin main
-```
+A standout feature of the XML Parser is its exceptional support for cyclic graphs. This feature proves invaluable when working with intricate data structures that may contain circular references.
 
-## Integrate with your tools
+Use the XML Parser's capabilities to navigate, analyze, and gain valuable insights from your XML data with ease. This component serves as an essential asset within the Graph Parser and Visualizator, enabling you to visualize and make sense of complex XML datasets.
 
-- [ ] [Set up project integrations](https://gitlab.com/sok_2022_2023/tim14/-/settings/integrations)
+### JSON Parser
 
-## Collaborate with your team
+The JSON Parser component of the Graph Parser and Visualizator is another powerful tool designed to parse and visualize JSON data effortlessly. It handles JSON data of any complexity and presents it in a graph format.
 
-- [ ] [Invite team members and collaborators](https://docs.gitlab.com/ee/user/project/members/)
-- [ ] [Create a new merge request](https://docs.gitlab.com/ee/user/project/merge_requests/creating_merge_requests.html)
-- [ ] [Automatically close issues from merge requests](https://docs.gitlab.com/ee/user/project/issues/managing_issues.html#closing-issues-automatically)
-- [ ] [Enable merge request approvals](https://docs.gitlab.com/ee/user/project/merge_requests/approvals/)
-- [ ] [Automatically merge when pipeline succeeds](https://docs.gitlab.com/ee/user/project/merge_requests/merge_when_pipeline_succeeds.html)
+Similar to the XML Parser, the JSON Parser also supports cyclic graphs, allowing you to handle complex data structures that may include circular references. This feature provides flexibility and convenience when working with intricate datasets.
 
-## Test and Deploy
+### Simple Visualizator
 
-Use the built-in continuous integration in GitLab.
+The D3 Simple Visualizator plugin offers a straightforward approach to visualize your data. Powered by the d3.js library, it represents nodes as circles with unique ID numbers, while the connections between nodes are depicted as lines.
 
-- [ ] [Get started with GitLab CI/CD](https://docs.gitlab.com/ee/ci/quick_start/index.html)
-- [ ] [Analyze your code for known vulnerabilities with Static Application Security Testing(SAST)](https://docs.gitlab.com/ee/user/application_security/sast/)
-- [ ] [Deploy to Kubernetes, Amazon EC2, or Amazon ECS using Auto Deploy](https://docs.gitlab.com/ee/topics/autodevops/requirements.html)
-- [ ] [Use pull-based deployments for improved Kubernetes management](https://docs.gitlab.com/ee/user/clusters/agent/)
-- [ ] [Set up protected environments](https://docs.gitlab.com/ee/ci/environments/protected_environments.html)
+This plugin's standout feature is its implementation of a force layout algorithm. By simulating physical forces between nodes, it creates an engaging and user-friendly visualization that effortlessly highlights clusters, trends, and patterns within the data.
 
-***
+With its simplicity and intuitive design, the D3 Simple Visualizer plugin is a perfect choice for users seeking a quick and hassle-free data visualization solution. It provides a high-level overview of the data without overwhelming you with excessive details.
 
-# Editing this README
+### Complex Visualizator
 
-When you're ready to make this README your own, just edit this file and use the handy template below (or feel free to structure it however you want - this is just a starting point!). Thank you to [makeareadme.com](https://www.makeareadme.com/) for this template.
+The D3 Complex Visualizator plugin is a powerful data visualization tool integrated into the Graph Parser and Visualizator. Leveraging the d3.js library, it presents each graph node as a rectangular shape, featuring a title that includes the node's name and ID, along with content displaying the node's attributes as key-value pairs.
 
-## Suggestions for a good README
-Every project is different, so consider which of these sections apply to yours. The sections used in the template are suggestions for most open source projects. Also keep in mind that while a README can be too long and detailed, too long is better than too short. If you think your README is too long, consider utilizing another form of documentation rather than cutting out information.
+To illustrate connections between nodes, the Complex Visualizator plugin employs lines that link the rectangles. Similar to the D3 Simple Visualizer plugin, it incorporates a force layout algorithm, ensuring an intuitive and visually captivating representation of the data.
 
-## Name
-Choose a self-explaining name for your project.
+While both plugins offer visualization capabilities, the Complex Visualizator plugin is particularly suitable for users who desire comprehensive insights into each node within the graph. This functionality proves invaluable when working with intricate datasets containing numerous attributes, enabling the identification of specific patterns and relationships within the data.
 
-## Description
-Let people know what your project can do specifically. Provide context and add a link to any reference visitors might be unfamiliar with. A list of Features or a Background subsection can also be added here. If there are alternatives to your project, this is a good place to list differentiating factors.
-
-## Badges
-On some READMEs, you may see small images that convey metadata, such as whether or not all the tests are passing for the project. You can use Shields to add some to your README. Many services also have instructions for adding a badge.
-
-## Visuals
-Depending on what you are making, it can be a good idea to include screenshots or even a video (you'll frequently see GIFs rather than actual videos). Tools like ttygif can help, but check out Asciinema for a more sophisticated method.
+Moreover, this plugin serves as a versatile tool for search and filtering tasks. Its rectangular node representation and clear display of key-value pairs make it effortless to search for specific nodes based on their attributes, facilitating efficient data exploration.
 
 ## Installation
-Within a particular ecosystem, there may be a common way of installing things, such as using Yarn, NuGet, or Homebrew. However, consider the possibility that whoever is reading your README is a novice and would like more guidance. Listing specific steps helps remove ambiguity and gets people to using your project as quickly as possible. If it only runs in a specific context like a particular programming language version or operating system or has dependencies that have to be installed manually, also add a Requirements subsection.
+1. Create your virtual environment
+```
+virtualenv <environment_name>
+```
+2. Activate virtual environment
+```
+environment_name/Scripts/Activate
+```
+3. Install Django
+```
+pip install django
+```
+### Install the App and Run the Server
 
-## Usage
-Use examples liberally, and show the expected output if you can. It's helpful to have inline the smallest example of usage that you can demonstrate, while providing links to more sophisticated examples if they are too long to reasonably include in the README.
+Windows:
+```
+run.cmd
+```
+Linux:
+```
+run.sh
+```
+### Open
+You can find the app at http://127.0.0.1:8000/
 
-## Support
-Tell people where they can go to for help. It can be any combination of an issue tracker, a chat room, an email address, etc.
+## Authors
+- [Miloš Čuturić](https://github.com/cuturic01)
+- [Luka Đorđević](https://github.com/lukaDjordjevic01)
+- [Marko Janošević](https://github.com/janosevicsm)
 
-## Roadmap
-If you have ideas for releases in the future, it is a good idea to list them in the README.
-
-## Contributing
-State if you are open to contributions and what your requirements are for accepting them.
-
-For people who want to make changes to your project, it's helpful to have some documentation on how to get started. Perhaps there is a script that they should run or some environment variables that they need to set. Make these steps explicit. These instructions could also be useful to your future self.
-
-You can also document commands to lint the code or run tests. These steps help to ensure high code quality and reduce the likelihood that the changes inadvertently break something. Having instructions for running tests is especially helpful if it requires external setup, such as starting a Selenium server for testing in a browser.
-
-## Authors and acknowledgment
-Show your appreciation to those who have contributed to the project.
-
-## License
-For open source projects, say how it is licensed.
-
-## Project status
-If you have run out of energy or time for your project, put a note at the top of the README saying that development has slowed down or stopped completely. Someone may choose to fork your project or volunteer to step in as a maintainer or owner, allowing your project to keep going. You can also make an explicit request for maintainers.
+## Academic Context
+Graph Parser and Visualizator was developed for the purposes of the course [Software Patterns and Components](http://www.ftn.uns.ac.rs/n446798796/softverski-obrasci-i-komponente).
+### Course Assistants
+- [Vladimir Inđić](https://gitlab.com/vlada_indjic)
+- [Ivan Mršulja](https://gitlab.com/ivanmrsulja)
+### Course Professor
+- [Igor Dejanović](https://gitlab.com/igordejanovic)
