@@ -2,7 +2,7 @@ from datetime import datetime
 
 from django.apps.registry import apps
 from django.db.models import Q
-from django.http import HttpResponseBadRequest
+from django.http import HttpResponseBadRequest, HttpResponse
 from django.shortcuts import render, redirect
 
 from core_app.models import Graph
@@ -38,6 +38,26 @@ def load_plugin_xml(request, id):
         if i.identifier() == id:
             i.load()
     return redirect('index')
+
+
+def upload(request):
+    if request.method == 'POST':
+        file = request.FILES['file']
+
+        with open("files/" + file.name, 'wb+') as destination:
+            for chunk in file.chunks():
+                destination.write(chunk)
+
+            extention = file.name.split(".")[-1]
+            if extention == "json":
+                return redirect('ucitavanje/json/plugin/parse_json')
+            elif extention == "xml":
+                return redirect('ucitavanje/xml/plugin/parse_xml')
+            # parser_plugins = apps.get_app_config('app_core').parser_plugins
+            # for key in parser_plugins.keys():
+            #     if file.name.split(".")[-1] == parser_plugins[key]['ext']:
+            #         return redirect('/parser/' + parser_plugins[key]['ext'] + '/' + file.name)
+    return HttpResponse(extention)
 
 
 def search_graph(request, layout_type, query_string):
