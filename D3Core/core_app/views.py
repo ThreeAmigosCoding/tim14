@@ -12,13 +12,11 @@ from core_app.models import Edge
 
 
 def index(request):
-    json_parser_plugin = apps.get_app_config('core_app').json_parser_plugin
-    xml_parser_plugin = apps.get_app_config('core_app').xml_parser_plugin
+    parser_plugins = apps.get_app_config('core_app').parser_plugins
     visualization_plugins = apps.get_app_config('core_app').visualization_plugins
 
     return render(request, "index.html", {"title": "Index",
-                                          "json_parser_plugin": json_parser_plugin,
-                                          "xml_parser_plugin": xml_parser_plugin,
+                                          "parser_plugins": parser_plugins,
                                           "visualization_plugins": visualization_plugins})
 
 
@@ -41,6 +39,7 @@ def load_plugin_xml(request, id):
 
 
 def upload(request):
+    parser_plugins = apps.get_app_config('core_app').parser_plugins
     if request.method == 'POST':
         file = request.FILES['file']
 
@@ -48,16 +47,14 @@ def upload(request):
             for chunk in file.chunks():
                 destination.write(chunk)
 
-            extention = file.name.split(".")[-1]
-            if extention == "json":
-                return redirect('ucitavanje/json/plugin/parse_json')
-            elif extention == "xml":
-                return redirect('ucitavanje/xml/plugin/parse_xml')
+            extension = file.name.split(".")[-1]
+            if parser_plugins[extension]:
+                return redirect('/parser/' + parser_plugins[extension] + '/' + file.name)
             # parser_plugins = apps.get_app_config('app_core').parser_plugins
             # for key in parser_plugins.keys():
             #     if file.name.split(".")[-1] == parser_plugins[key]['ext']:
             #         return redirect('/parser/' + parser_plugins[key]['ext'] + '/' + file.name)
-    return HttpResponse(extention)
+    return HttpResponse("Failed to upload")
 
 
 def search_graph(request, layout_type, query_string):

@@ -17,8 +17,8 @@ class XmlParser(LoadService):
     def identifier(self):
         return "parse_xml"
 
-    def load(self):
-        self.parse_xml_to_graph(self.test_xml_data())
+    def load(self, file):
+        self.parse_xml_to_graph(self.load_from_file(file))
 
     def parse_xml_to_graph(self, xml_string):
         root = ET.fromstring(xml_string)
@@ -127,5 +127,12 @@ class XmlParser(LoadService):
                             <city>Los Angeles</city>
                         </address>
                     </person>
+                    <aaaa name="testNode"/>
                 </graph>
                 '''
+
+    def load_from_file(self, file):
+        with open("files/" + file, 'r', encoding='utf-8') as f:
+            file_contents = f.read()
+        print(file_contents)
+        return file_contents

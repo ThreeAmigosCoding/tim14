@@ -8,14 +8,12 @@ def simple_visualization(request):
     root_nodes = graph.find_root_nodes()
     nodes = graph.nodes.all()
     edges = graph.edges.all()
-    json_parser_plugin = apps.get_app_config('core_app').json_parser_plugin
-    xml_parser_plugin = apps.get_app_config('core_app').xml_parser_plugin
+    parser_plugins = apps.get_app_config('core_app').parser_plugins
     visualization_plugins = apps.get_app_config('core_app').visualization_plugins
     return render(request, "simple_visualization.html", {
         "root_nodes": root_nodes,
         "nodes": nodes,
         "edges": edges,
-        "json_parser_plugin": json_parser_plugin,
-        "xml_parser_plugin": xml_parser_plugin,
+        "parser_plugins": parser_plugins,
         "visualization_plugins": visualization_plugins
     })

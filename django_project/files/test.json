@@ -1,0 +1,764 @@
+{
+  "catalogFirst": {
+    "id": "0",
+    "book": [
+      {
+        "author": {
+          "name": "Stephen",
+          "surname": "King",
+          "id": "au1",
+          "city": {
+            "id": "ct1",
+            "name": "Portland, Maine",
+            "country": {
+              "id": "cu1",
+              "name": "America"
+            }
+          }
+        },
+        "title": "It",
+        "genre": "Horror",
+        "price": "45",
+        "publish_date": "1986-09-15",
+        "description": "The story follows the experiences of seven children as they are terrorized by an evil entity that exploits the fears of its victims to disguise itself while hunting its prey.",
+        "id": "bk1",
+        "publisher": {
+          "id": "pu1",
+          "name": "Simon & Schuster",
+          "country": {
+            "references": "cu1"
+          },
+          "catalog": {
+            "references": "0"
+          },
+          "provides": [
+            {
+              "references": "bk1"
+            },
+            {
+              "references": "bk5"
+            },
+            {
+              "references": "bk7"
+            },
+            {
+              "references": "bk8"
+            }
+          ]
+        }
+      },
+      {
+        "author": {
+          "references": "au1"
+        },
+        "title": "The Shining",
+        "genre": "Horror",
+        "price": "5.95",
+        "publish_date": "1977-01-28",
+        "description": ". It tells the story of Jack, Wendy, and Danny Torrance during an isolated winter in which Jack becomes the caretaker of Colorado's Overlook Hotel.",
+        "id": "bk2",
+        "publisher": {
+          "id": "pu2",
+          "name": "Doubleday",
+          "country": {
+            "references": "cu1"
+          }
+        }
+      },
+      {
+        "author": {
+          "name": "Elizabeth",
+          "surname": "Cunningham",
+          "id": "au2",
+          "city": {
+            "id": "ct2",
+            "name": "Portland, Maine",
+            "country": {
+              "id": "cu2",
+              "name": "England"
+            }
+          }
+        },
+        "title": "The Passion of Mary Magdalen",
+        "genre": "History",
+        "price": "5.95",
+        "publish_date": "2006-04-01",
+        "description": "A story of the relationship between Jesus \"the Bridegroom\" and Mary of Magdalen, a red head \"beautiful witch from the Isle of Women\" who was sold into prostitution in Rome.",
+        "id": "bk3",
+        "publisher": {
+          "references": "pu1"
+        }
+      },
+      {
+        "author": {
+          "references": "au2"
+        },
+        "title": "Magdalen Rising: The Beginning",
+        "genre": "History",
+        "price": "6.5",
+        "publish_date": "2007-03-10",
+        "description": "She was happiest in the enchanted wood of the overgrown estate next door to the church.",
+        "id": "bk4",
+        "publisher": {
+          "references": "pu1"
+        }
+      },
+      {
+        "author": {
+          "name": "James",
+          "surname": "Patterson",
+          "id": "au3",
+          "city": {
+            "id": "ct3",
+            "name": "New York",
+            "country": {
+              "references": "cu1"
+            }
+          }
+        },
+        "title": "Middle school, the worst years of my life",
+        "genre": "Fiction",
+        "price": "5.95",
+        "publish_date": "2011-05-26",
+        "description": "James Patterson's debut middle-grade novel addresses some of middle schoolers' biggest issues: bullies, first crushes, and finding out what makes each of us special.",
+        "id": "bk5",
+        "publisher": {
+          "id": "pu3",
+          "name": "Penguin/Random House",
+          "country": {
+            "references": "cu1"
+          }
+        }
+      },
+      {
+        "author": {
+          "name": "James",
+          "surname": "Baldwin",
+          "id": "au4",
+          "city": {
+            "references": "ct3"
+          }
+        },
+        "title": "The Fire Next Time",
+        "genre": "Action",
+        "price": "5",
+        "publish_date": "1963-09-02",
+        "description": "At once a powerful evocation of James Baldwin's early life in Harlem and a disturbing examination of the consequences of racial injustice.",
+        "id": "bk6",
+        "publisher": {
+          "id": "pu4",
+          "name": "Vulkan",
+          "country": {
+            "references": "cu3"
+          }
+        }
+      },
+      {
+        "author": {
+          "name": "Danilo",
+          "surname": "Kiš",
+          "id": "au5",
+          "city": {
+            "id": "ct4",
+            "name": "Subotica",
+            "country": {
+              "id": "cu3",
+              "name": "Serbia"
+            }
+          }
+        },
+        "title": "Rani Jadi",
+        "genre": "Biography",
+        "price": "5",
+        "publish_date": "1970-11-02",
+        "description": "In this book Danilo Kiš talks about his early life.",
+        "id": "bk7",
+        "publisher": {
+          "references": "pu4"
+        }
+      },
+      {
+        "author": {
+          "name": "Ivo",
+          "surname": "Andrić",
+          "id": "au6",
+          "city": {
+            "id": "ct5",
+            "name": "Dolac",
+            "country": {
+              "id": "cu4",
+              "name": "Bosnia and herzegovina"
+            }
+          }
+        },
+        "title": "Na Drini ćuprija",
+        "genre": "History Fiction",
+        "price": "5",
+        "publish_date": "1845-04-06",
+        "description": "This roman talks about history of bridge on river Drina.",
+        "id": "bk8",
+        "publisher": {
+          "references": "pu4"
+        }
+      },
+      {
+        "author": {
+          "name": "Vuk",
+          "surname": "Karadžić",
+          "id": "au7",
+          "city": {
+            "id": "ct6",
+            "name": "Tršić",
+            "country": {
+              "references": "cu3"
+            }
+          }
+        },
+        "title": "Život i običaji naroda srpskog",
+        "genre": "History",
+        "price": "7",
+        "publish_date": "1867-11-02",
+        "description": "Talks about habits and belief of serbian people.",
+        "id": "bk9"
+      },
+      {
+        "author": {
+          "name": "Franz",
+          "surname": "Kafka",
+          "id": "au8",
+          "city": {
+            "id": "ct7",
+            "name": "Prague",
+            "country": {
+              "id": "cu5",
+              "name": "Czechia"
+            }
+          }
+        },
+        "title": "The trial",
+        "genre": "Dystopian fiction",
+        "price": "20",
+        "publish_date": "1925-12-09",
+        "description": "Josef K., the chief cashier in a bank, is arrested one morning by two mysterious agents. However, they refuse to tell him what crime he is accused of.",
+        "id": "bk10",
+        "publisher": {
+          "id": "pu5",
+          "name": "Verlag Die Schmiede, Berlin",
+          "country": {
+            "id": "cu8",
+            "name": "Germany"
+          }
+        }
+      },
+      {
+        "author": {
+          "name": "George",
+          "surname": "Orwell",
+          "id": "au9",
+          "city": {
+            "id": "ct8",
+            "name": "Motihari",
+            "country": {
+              "id": "cu6",
+              "name": "India"
+            }
+          }
+        },
+        "title": "Animal Farm",
+        "genre": "Allegory",
+        "price": "15",
+        "publish_date": "1945-08-17",
+        "description": "It tells the story of a group of farm animals who rebel against their human farmer, hoping to create a society where the animals can be equal, free, and happy.",
+        "id": "bk11",
+        "publisher": {
+          "references": "pu1"
+        }
+      },
+      {
+        "author": {
+          "name": "Agatha",
+          "surname": "Christie",
+          "id": "au10",
+          "city": {
+            "id": "ct9",
+            "name": "Torki",
+            "country": {
+              "references": "cu2"
+            }
+          }
+        },
+        "title": "Murder on the Orient Express",
+        "genre": "Crime",
+        "price": "50",
+        "publish_date": "1934-01-01",
+        "description": "An American tycoon lies dead in his compartment, stabbed a dozen times, his door locked from the inside.",
+        "id": "bk12",
+        "publisher": {
+          "id": "pu6",
+          "name": "Collins Crime Club",
+          "country": {
+            "references": "cu2"
+          }
+        }
+      }
+    ]
+  },
+  "catalogSecond": {
+    "id": "1",
+    "book": [
+      {
+        "author": {
+          "name": "Mark",
+          "surname": "Twain",
+          "id": "au11",
+          "city": {
+            "id": "ct10",
+            "name": "Florida",
+            "country": {
+              "references": "cu1"
+            }
+          }
+        },
+        "title": "The Adventures of Tom Sawyer",
+        "genre": "Kids literature",
+        "price": "30",
+        "publish_date": "1876-10-01",
+        "description": "The Adventures of Tom Sawyer, novel by Mark Twain, published in 1876, that centres on a smart mischievous young boy living in a town along the Mississippi River. ",
+        "id": "bk13",
+        "publisher": {
+          "id": "pu7",
+          "name": "American Publishing Company",
+          "country": {
+            "references": "cu1"
+          }
+        }
+      },
+      {
+        "author": {
+          "name": "Joanne",
+          "surname": "Rowling",
+          "id": "au12",
+          "city": {
+            "id": "ct11",
+            "name": "Bristol",
+            "country": {
+              "references": "cu2"
+            }
+          }
+        },
+        "title": "Harry Potter and the Philosopher's Stone",
+        "genre": "Fiction",
+        "price": "6",
+        "publish_date": "1997-06-26",
+        "description": "it followed the adventures of the unlikely hero Harry Potter, a lonely orphan who discovers that he is actually a wizard and enrolls in the Hogwarts School of Witchcraft and Wizardry.",
+        "id": "bk14",
+        "publisher": {
+          "id": "pu8",
+          "name": "Bloomsbury",
+          "country": {
+            "references": "cu2"
+          }
+        }
+      },
+      {
+        "author": {
+          "references": "au12"
+        },
+        "title": "Harry Potter and the Chamber of Secrets",
+        "genre": "Fiction",
+        "price": "6",
+        "publish_date": "1997-06-26",
+        "description": "it followed the adventures of the unlikely hero Harry Potter, a lonely orphan who discovers that he is actually a wizard and enrolls in the Hogwarts School of Witchcraft and Wizardry.",
+        "id": "bk15",
+        "publisher": {
+          "references": "pu8"
+        }
+      },
+      {
+        "author": {
+          "references": "au12"
+        },
+        "title": "Harry Potter and the Prisoner of Azkaban",
+        "genre": "Fiction",
+        "price": "6",
+        "publish_date": "1997-06-26",
+        "description": "it followed the adventures of the unlikely hero Harry Potter, a lonely orphan who discovers that he is actually a wizard and enrolls in the Hogwarts School of Witchcraft and Wizardry.",
+        "id": "bk16",
+        "publisher": {
+          "references": "pu8"
+        }
+      },
+      {
+        "author": {
+          "references": "au12"
+        },
+        "title": "Harry Potter and the Goblet of Fire",
+        "genre": "Fiction",
+        "price": "6",
+        "publish_date": "1997-06-26",
+        "description": "it followed the adventures of the unlikely hero Harry Potter, a lonely orphan who discovers that he is actually a wizard and enrolls in the Hogwarts School of Witchcraft and Wizardry.",
+        "id": "bk17",
+        "publisher": {
+          "references": "pu8"
+        }
+      },
+      {
+        "author": {
+          "references": "au12"
+        },
+        "title": "Harry Potter and the Order of the Phoenix",
+        "genre": "Fiction",
+        "price": "6",
+        "publish_date": "1997-06-26",
+        "description": "it followed the adventures of the unlikely hero Harry Potter, a lonely orphan who discovers that he is actually a wizard and enrolls in the Hogwarts School of Witchcraft and Wizardry.",
+        "id": "bk18",
+        "publisher": {
+          "references": "pu8"
+        }
+      },
+      {
+        "author": {
+          "references": "au12"
+        },
+        "title": "Harry Potter and the Half-Blood Prince",
+        "genre": "Fiction",
+        "price": "6",
+        "publish_date": "1997-06-26",
+        "description": "it followed the adventures of the unlikely hero Harry Potter, a lonely orphan who discovers that he is actually a wizard and enrolls in the Hogwarts School of Witchcraft and Wizardry.",
+        "id": "bk19",
+        "publisher": {
+          "references": "pu8"
+        }
+      },
+      {
+        "author": {
+          "references": "au12"
+        },
+        "title": "Harry Potter and the Deathly Hallows",
+        "genre": "Fiction",
+        "price": "6",
+        "publish_date": "1997-06-26",
+        "description": "it followed the adventures of the unlikely hero Harry Potter, a lonely orphan who discovers that he is actually a wizard and enrolls in the Hogwarts School of Witchcraft and Wizardry.",
+        "id": "bk20",
+        "publisher": {
+          "references": "pu8"
+        }
+      },
+      {
+        "author": {
+          "references": "au12"
+        },
+        "title": "Harry Potter and the Cursed Child: Parts One and Two",
+        "genre": "Fiction",
+        "price": "6",
+        "publish_date": "1997-06-26",
+        "description": "it followed the adventures of the unlikely hero Harry Potter, a lonely orphan who discovers that he is actually a wizard and enrolls in the Hogwarts School of Witchcraft and Wizardry.",
+        "id": "bk21",
+        "publisher": {
+          "references": "pu8"
+        }
+      },
+      {
+        "author": {
+          "name": "John",
+          "surname": "Tolkien",
+          "id": "au13",
+          "city": {
+            "id": "ct12",
+            "name": "Bournemouth",
+            "country": {
+              "references": "cu2"
+            }
+          }
+        },
+        "title": "The Fellowship of the Ring",
+        "genre": "Fantastic",
+        "price": "10",
+        "publish_date": "1954-07-29",
+        "description": "The Fellowship of the Ring is the first of three volumes in The Lord of the Rings, an epic set in the fictional world of Middle-earth.",
+        "id": "bk22",
+        "publisher": {
+          "id": "pu9",
+          "name": "George Allen & Unwin",
+          "country": {
+            "id": "cu9",
+            "name": "Australia"
+          }
+        }
+      },
+      {
+        "author": {
+          "name": "Leo",
+          "surname": "Tolstoy",
+          "id": "au14",
+          "city": {
+            "id": "ct13",
+            "name": "Yasnaya Polyana",
+            "country": {
+              "id": "cu7",
+              "name": "Russia"
+            }
+          }
+        },
+        "title": "War and peace",
+        "genre": "History",
+        "price": "5.95",
+        "publish_date": "1867-03-10",
+        "description": "War and Peace broadly focuses on Napoleon's invasion of Russia in 1812 and follows three of the most well-known characters in literature.",
+        "id": "bk23",
+        "publisher": {
+          "id": "pu10",
+          "name": "The Russian Messenger",
+          "country": {
+            "references": "cu7"
+          }
+        }
+      },
+      {
+        "author": {
+          "name": "William",
+          "surname": "Shakespeare",
+          "id": "au15",
+          "city": {
+            "id": "ct14",
+            "name": "Stratford",
+            "country": {
+              "references": "cu2"
+            }
+          }
+        },
+        "title": "Hamlet",
+        "genre": "Tragedy",
+        "price": "5.95",
+        "publish_date": "1603-09-10",
+        "description": "The ghost of the King of Denmark tells his son Hamlet to avenge his murder by killing the new king, Hamlet's uncle.",
+        "id": "bk24",
+        "publisher": {
+          "references": "pu2"
+        }
+      },
+      {
+        "author": {
+          "name": "Lewis",
+          "surname": "Caroll",
+          "id": "au16",
+          "city": {
+            "id": "ct15",
+            "name": "Daresbury",
+            "country": {
+              "references": "cu2"
+            }
+          }
+        },
+        "title": "Alice in Wonderland",
+        "genre": "Kids literature",
+        "price": "4.95",
+        "publish_date": "1865-09-02",
+        "description": "Alice's Adventures in Wonderland by Lewis Carroll is a story about Alice who falls down a rabbit hole and lands into a fantasy world that is full of weird, wonderful people and animals.",
+        "id": "bk25",
+        "publisher": {
+          "references": "pu2"
+        }
+      },
+      {
+        "author": {
+          "name": "Roald",
+          "surname": "Dahl",
+          "id": "au17",
+          "city": {
+            "id": "ct16",
+            "name": "Cardiff",
+            "country": {
+              "references": "cu2"
+            }
+          }
+        },
+        "title": "Charlie and the chocolate factory",
+        "genre": "Kids literature",
+        "price": "4.95",
+        "publish_date": "1964-11-02",
+        "description": "Charlie Bucket lives on the outskirts of town with his poverty-stricken family: his parents and all four grandparents.",
+        "id": "bk26",
+        "publisher": {
+          "references": "pu1"
+        }
+      },
+      {
+        "author": {
+          "name": "Tom",
+          "surname": "Clancy",
+          "id": "au18",
+          "city": {
+            "id": "ct17",
+            "name": "Baltimore",
+            "country": {
+              "references": "cu1"
+            }
+          }
+        },
+        "title": "Rainbow Six",
+        "genre": "Thriller",
+        "price": "4.95",
+        "publish_date": "1998-09-06",
+        "description": "Rainbow Six follows \"Rainbow\", a secret international counterterrorist organization headed by Clark (whose codename is \"Rainbow Six\"), and the complex apocalyptic conspiracy they unravel after handling multiple seemingly random terrorist attacks.",
+        "id": "bk27",
+        "publisher": {
+          "references": "pu1"
+        }
+      },
+      {
+        "author": {
+          "name": "Ernest",
+          "surname": "Hemingway",
+          "id": "au19",
+          "city": {
+            "id": "ct18",
+            "name": "Oak park",
+            "country": {
+              "references": "cu1"
+            }
+          }
+        },
+        "title": "The Old Man and the Sea",
+        "genre": "History",
+        "price": "6.95",
+        "publish_date": "1952-11-02",
+        "description": "The Old Man and the Sea is the story of an epic struggle between an old, seasoned fisherman and the greatest catch of his life. For eighty-four days, Santiago, an aged Cuban fisherman, has set out to sea and returned empty-handed.",
+        "id": "bk28",
+        "publisher": {
+          "references": "pu1"
+        }
+      },
+      {
+        "author": {
+          "name": "Charles",
+          "surname": "Dickens",
+          "id": "au20",
+          "city": {
+            "id": "ct19",
+            "name": "Landport",
+            "country": {
+              "references": "cu2"
+            }
+          }
+        },
+        "title": "Oliver Twist",
+        "genre": "Roman",
+        "price": "30.00",
+        "publish_date": "1838-12-09",
+        "description": "Oliver Twist is a book about a young orphaned boy living in London in the Victorian era. After his mother dies during childbirth, Oliver is sent to live in a workhouse, where he is mistreated along with the other children who live there. There's not enough food to go around, and no role models to call on.",
+        "id": "bk29",
+        "publisher": {
+          "references": "pu1"
+        }
+      },
+      {
+        "author": {
+          "name": "George",
+          "surname": "Martin",
+          "id": "au21",
+          "city": {
+            "id": "ct20",
+            "name": "London",
+            "country": {
+              "references": "cu2"
+            }
+          }
+        },
+        "title": "A Game of Thrones",
+        "genre": "Roman",
+        "price": "30.00",
+        "publish_date": "1838-12-09",
+        "description": "The story begins when King Robert visits the northern castle Winterfell to ask Ned Stark to be his right-hand assistant, or Hand of the King.",
+        "id": "bk30",
+        "publisher": {
+          "references": "pu1"
+        }
+      },
+      {
+        "author": {
+          "references": "au21"
+        },
+        "title": "A Clash Of Kings",
+        "genre": "Roman",
+        "price": "30.00",
+        "publish_date": "1838-12-09",
+        "description": "The story begins when King Robert visits the northern castle Winterfell to ask Ned Stark to be his right-hand assistant, or Hand of the King.",
+        "id": "bk31",
+        "publisher": {
+          "references": "pu1"
+        }
+      },
+      {
+        "author": {
+          "references": "au21"
+        },
+        "title": "Oliver Twist",
+        "genre": "Roman",
+        "price": "30.00",
+        "publish_date": "1838-12-09",
+        "description": "The story begins when King Robert visits the northern castle Winterfell to ask Ned Stark to be his right-hand assistant, or Hand of the King.",
+        "id": "bk32",
+        "publisher": {
+          "references": "pu1"
+        }
+      },
+      {
+        "author": {
+          "references": "au21"
+        },
+        "title": "A Storm of Kings",
+        "genre": "Roman",
+        "price": "30.00",
+        "publish_date": "1838-12-09",
+        "description": "The story begins when King Robert visits the northern castle Winterfell to ask Ned Stark to be his right-hand assistant, or Hand of the King.",
+        "id": "bk33",
+        "publisher": {
+          "references": "pu1"
+        }
+      },
+      {
+        "author": {
+          "references": "au21"
+        },
+        "title": "A Feast of Crows",
+        "genre": "Roman",
+        "price": "30.00",
+        "publish_date": "1838-12-09",
+        "description": "The story begins when King Robert visits the northern castle Winterfell to ask Ned Stark to be his right-hand assistant, or Hand of the King.",
+        "id": "bk34",
+        "publisher": {
+          "references": "pu1"
+        }
+      },
+      {
+        "author": {
+          "references": "au21"
+        },
+        "title": "A Dance With Dragons",
+        "genre": "Roman",
+        "price": "30.00",
+        "publish_date": "1838-12-09",
+        "description": "The story begins when King Robert visits the northern castle Winterfell to ask Ned Stark to be his right-hand assistant, or Hand of the King.",
+        "id": "bk35",
+        "publisher": {
+          "references": "pu1"
+        }
+      },
+      {
+        "author": {
+          "references": "au21"
+        },
+        "title": "The Winds of Winter",
+        "genre": "Roman",
+        "price": "30.00",
+        "publish_date": "1838-12-09",
+        "description": "The story begins when King Robert visits the northern castle Winterfell to ask Ned Stark to be his right-hand assistant, or Hand of the King.",
+        "id": "bk36",
+        "publisher": {
+          "references": "pu1"
+        }
+      }
+    ]
+  }
+}
