@@ -9,7 +9,6 @@ from core_app.models import Attribute
 from datetime import datetime
 
 
-
 class JsonParser(LoadService):
 
     def __init__(self):
@@ -23,8 +22,8 @@ class JsonParser(LoadService):
     def identifier(self):
         return "parse_json"
 
-    def load(self):
-        self.parse_json_to_graph(self.test_json_data())
+    def load(self, file):
+        self.parse_json_to_graph(self.load_from_file(file))
 
     def parse_json_to_graph(self, json_data):
         Graph.objects.all().delete()
@@ -48,7 +47,8 @@ class JsonParser(LoadService):
             node = Node.objects.create(node_id=self.node_id, name=key_name, graph=graph)
             for keym, valuem in data.items():
                 if not isinstance(valuem, (dict, list)):
-                    Attribute.objects.create(node=node, name=keym, value=valuem, value_type=self.get_variable_type(valuem))
+                    Attribute.objects.create(node=node, name=keym, value=valuem,
+                                             value_type=self.get_variable_type(valuem))
                     if keym == "id":
                         self.id_map[valuem] = node
                     if keym == "references":
@@ -60,7 +60,8 @@ class JsonParser(LoadService):
                 self.parse_json(graph, value, node, key)
         elif isinstance(data, list):
             if self.check_list_type(data) == "Primitive":
-                Attribute.objects.create(node=parent_node, name=key_name, value=data, value_type=self.get_variable_type(data))
+                Attribute.objects.create(node=parent_node, name=key_name, value=data,
+                                         value_type=self.get_variable_type(data))
             else:
                 for item in data:
                     self.parse_json(graph, item, parent_node, key_name)
@@ -143,3 +144,8 @@ class JsonParser(LoadService):
                   }
                 }
         '''
+
+    def load_from_file(self, file):
+        with open("files/" + file, 'r', encoding='utf-8') as f:
+            file_contents = f.read()
+        return file_contents

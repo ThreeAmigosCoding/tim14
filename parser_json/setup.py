@@ -6,8 +6,12 @@ setup(
     packages=find_packages(),
     install_requires=['core-app>=0.1'],
     entry_points = {
-        'parsers_json':
-            ['parse_code_json=parse.code.parse_code_json:JsonParser'],
+        'parser_metadata':
+            ['extension=json', 'name=json'],
+        'parse':
+            ['parse=parser_json.apps.JsonParserConfig'],
+        'urls':
+            ['path=parser_json.urls']
     },
     zip_safe=True
 )

@@ -16,8 +16,8 @@ class Graph(models.Model):
                     cyclic = False
                     break
             if cyclic:
-                node_children_count = sum(1 for edge in self.edges.filter(start_node=subgraph[0]))
-                max_children_node = subgraph[0]
+                node_children_count = sum(1 for edge in self.edges.filter(start_node=list(subgraph)[0]))
+                max_children_node = list(subgraph)[0]
                 for node in subgraph:
                     subgraph_node_children_count = sum(1 for edge in self.edges.filter(start_node=node))
                     if subgraph_node_children_count > node_children_count:

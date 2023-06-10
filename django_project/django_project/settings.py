@@ -36,6 +36,7 @@ def load_plugins(group_id):
 
 
 VISUALIZATION_PLUGINS = set(load_plugins('visualization'))
+PARSER_PLUGINS = set(load_plugins('parse'))
 
 # Application definition
 
@@ -47,7 +48,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-] + list(VISUALIZATION_PLUGINS)
+] + list(VISUALIZATION_PLUGINS) + list(PARSER_PLUGINS)
 
 # TODO Promeniti set u list
 

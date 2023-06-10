@@ -110,7 +110,7 @@
             padding-right: 40px;
         }
 
-        #vizualization-plugins a {
+        #visualization-plugins a {
             margin-right: 30px;
         }
 
@@ -124,27 +124,27 @@
 <body>
     <nav>
         <ul id="plugins-list">
-            <li>
-                {% if json_parser_plugin %}
-                    {% for p in json_parser_plugin %}
-                        <!--Prikazivanje dostupnih plugina korisniku-->
-                        <a href="{% url 'json_parse_plugin' id=p.identifier %}">{{p.name}}</a>
-                    {% endfor %}
-                {% else %}
-                    <h3>Nema prepoznatih plugina za ucitavanje iz jsona</h3>
-                {% endif %}
-            </li>
-            <li>
-                {% if xml_parser_plugin %}
-                    {% for p in xml_parser_plugin %}
-                        <!--Prikazivanje dostupnih plugina korisniku-->
-                        <a href="{% url 'xml_parse_plugin' id=p.identifier %}">{{p.name}}</a>
-                    {% endfor %}
-                {% else %}
-                    <h3>Nema prepoznatih plugina za ucitavanje iz xml-a</h3>
-                {% endif %}
-            </li>
-            <li>
+{#            <li>#}
+{#                {% if json_parser_plugin %}#}
+{#                    {% for p in json_parser_plugin %}#}
+{#                        <!--Prikazivanje dostupnih plugina korisniku-->#}
+{#                        <a href="{% url 'json_parse_plugin' id=p.identifier %}">{{p.name}}</a>#}
+{#                    {% endfor %}#}
+{#                {% else %}#}
+{#                    <h3>Nema prepoznatih plugina za ucitavanje iz jsona</h3>#}
+{#                {% endif %}#}
+{#            </li>#}
+{#            <li>#}
+{#                {% if xml_parser_plugin %}#}
+{#                    {% for p in xml_parser_plugin %}#}
+{#                        <!--Prikazivanje dostupnih plugina korisniku-->#}
+{#                        <a href="{% url 'xml_parse_plugin' id=p.identifier %}">{{p.name}}</a>#}
+{#                    {% endfor %}#}
+{#                {% else %}#}
+{#                    <h3>Nema prepoznatih plugina za ucitavanje iz xml-a</h3>#}
+{#                {% endif %}#}
+{#            </li>#}
+            <li id="visualization-plugins">
                 {% if visualization_plugins %}
                     {% for p in visualization_plugins %}
                         <!--Prikazivanje dostupnih plugina korisniku-->
