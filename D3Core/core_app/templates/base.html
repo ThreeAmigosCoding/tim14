@@ -110,6 +110,14 @@
             padding-right: 40px;
         }
 
+        #vizualization-plugins a {
+            margin-right: 30px;
+        }
+
+        .upload-form {
+            float: right;
+        }
+
     </style>
     {% block head_sadrzaj %}{% endblock %}
 </head>
@@ -145,6 +153,13 @@
                 {% else %}
                     <h3>Nema prepoznatih plugina za vizualizaciju</h3>
                 {% endif %}
+            </li>
+            <li>
+                <form class="upload-form" method="post" enctype="multipart/form-data" action="/upload">
+                    {% csrf_token %}
+                    <input id="upload-input" type="file" name="file" required>
+                    <button class="submit-btn" type="submit">Upload</button>
+                </form>
             </li>
         </ul>
     </nav>
